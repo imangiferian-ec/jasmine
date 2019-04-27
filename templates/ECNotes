@@ -1,0 +1,29 @@
+1. Wala pa yong relationship para sa users table kaya incomplete pa ang mga association ng tables
+na nakaconnect sa user
+- Department `dept_head` //user na head ng department
+- EnrollementDetails `user_id` //user na nag-asikaso ng enrollment
+- Students, Professors `user_id` // user_id ng professor at student
+- Student `profiler_user_id` //user na nagprofile student na ito
+
+nodify nalang natin kapag nasa part na tayo na imomodify natin
+
+2. CRUD Muna ang gawin natin.
+Process/Relation at ang table na need kaya dapat lagyan na ng CRUD
++Data Build-up
+- Lahat ng school my Building
+- Lahat ng bulding may Room
+- May Colleges ang bawat school (e.g. College of Business)
+- Bawat school ay may department (optional na nakarelate ito sa course, ito kasi ang nag-oofer ng subjects per course)
+- Bawat Colleges ay courses (BSBA Marketing, BSBA Human Resources)
+- Bawat Courses ay may curriculum
+- Bawat curriculum ay may subjects //kailangang gawin na muna ang subjects CRUD
+
+-gagawa ng (CRUD) AcademicYear
+(ito yong magsasabi kung kelan magsisimula ang school year,
+my check box dapat na magsasabi kung tumatanggap na ng examinee)
+-kapag active ang AcademicYear at Nakacheck ang isAcceptingExaminee ay
+  - May mga StudentExaminee //ito ang mga nag-aaply ng entrance exam
+  - iseset ng Admin ang ExamPassingScore (CRUD)
+- Need natin ng CRUD para sa semester
+- Gagawa ng (CRUD) academic AcademicYearInstance para sa pagsisimula ng semester/period
+- 
