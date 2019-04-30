@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/student/profiling/details")
+ * @Route("/student-profiling-details")
  */
 class StudentProfilingDetailsController extends AbstractController
 {

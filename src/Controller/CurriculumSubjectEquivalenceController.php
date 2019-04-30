@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/curriculum/subject/equivalence")
+ * @Route("/curriculum-subject-equivalence")
  */
 class CurriculumSubjectEquivalenceController extends AbstractController
 {

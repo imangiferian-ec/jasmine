@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/curriculum/subject/prerequisite")
+ * @Route("/curriculum-subject-prerequisite")
  */
 class CurriculumSubjectPrerequisiteController extends AbstractController
 {

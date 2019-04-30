@@ -1,127 +1,126 @@
 ITO YONG MGA AVAILABLE ROUTE NATIN
-  academic_year_index                      GET        ANY      ANY      /academic/year/
-  academic_year_new                        GET|POST   ANY      ANY    /academic/year/new
-  academic_year_show                       GET        ANY      ANY    /academic/year/{id}
-  academic_year_edit                       GET|POST   ANY      ANY    /academic/year/{id}/edit
-  academic_year_delete                     DELETE     ANY      ANY    /academic/year/{id}
-  academic_year_instance_index             GET        ANY      ANY    /academic/year/instance/
-  academic_year_instance_new               GET|POST   ANY      ANY    /academic/year/instance/new
-  academic_year_instance_show              GET        ANY      ANY    /academic/year/instance/{id}
-  academic_year_instance_edit              GET|POST   ANY      ANY    /academic/year/instance/{id}/edit
-  academic_year_instance_delete            DELETE     ANY      ANY    /academic/year/instance/{id}
-  added_prof_load_index                    GET        ANY      ANY    /added/prof/load/
-  added_prof_load_new                      GET|POST   ANY      ANY    /added/prof/load/new
-  added_prof_load_show                     GET        ANY      ANY    /added/prof/load/{id}
-  added_prof_load_edit                     GET|POST   ANY      ANY    /added/prof/load/{id}/edit
-  added_prof_load_delete                   DELETE     ANY      ANY    /added/prof/load/{id}
-  building_index                           GET        ANY      ANY    /building/
-  building_new                             GET|POST   ANY      ANY    /building/new
-  building_show                            GET        ANY      ANY    /building/{id}
-  building_edit                            GET|POST   ANY      ANY    /building/{id}/edit
-  building_delete                          DELETE     ANY      ANY    /building/{id}
-  college_index                            GET        ANY      ANY    /college/
-  college_new                              GET|POST   ANY      ANY    /college/new
-  college_show                             GET        ANY      ANY    /college/{id}
-  college_edit                             GET|POST   ANY      ANY    /college/{id}/edit
-  college_delete                           DELETE     ANY      ANY    /college/{id}
-  course_index                             GET        ANY      ANY    /course/
-  course_new                               GET|POST   ANY      ANY    /course/new
-  course_show                              GET        ANY      ANY    /course/{id}
-  course_edit                              GET|POST   ANY      ANY    /course/{id}/edit
-  course_delete                            DELETE     ANY      ANY    /course/{id}
-  curriculum_index                         GET        ANY      ANY    /curriculum/
-  curriculum_new                           GET|POST   ANY      ANY    /curriculum/new
-  curriculum_show                          GET        ANY      ANY    /curriculum/{id}
-  curriculum_edit                          GET|POST   ANY      ANY    /curriculum/{id}/edit
-  curriculum_delete                        DELETE     ANY      ANY    /curriculum/{id}
-  curriculum_subject_index                 GET        ANY      ANY    /curriculum/subject/
-  curriculum_subject_new                   GET|POST   ANY      ANY    /curriculum/subject/new
-  curriculum_subject_show                  GET        ANY      ANY    /curriculum/subject/{id}
-  curriculum_subject_edit                  GET|POST   ANY      ANY    /curriculum/subject/{id}/edit
-  curriculum_subject_delete                DELETE     ANY      ANY    /curriculum/subject/{id}
-  curriculum_subject_equivalence_index     GET        ANY      ANY    /curriculum/subject/equivalence/
-  curriculum_subject_equivalence_new       GET|POST   ANY      ANY    /curriculum/subject/equivalence/new
-  curriculum_subject_equivalence_show      GET        ANY      ANY    /curriculum/subject/equivalence/{id}
-  curriculum_subject_equivalence_edit      GET|POST   ANY      ANY    /curriculum/subject/equivalence/{id}/edit
-  curriculum_subject_equivalence_delete    DELETE     ANY      ANY    /curriculum/subject/equivalence/{id}
-  curriculum_subject_prerequisite_index    GET        ANY      ANY    /curriculum/subject/prerequisite/
-  curriculum_subject_prerequisite_new      GET|POST   ANY      ANY    /curriculum/subject/prerequisite/new
-  curriculum_subject_prerequisite_show     GET        ANY      ANY    /curriculum/subject/prerequisite/{id}
-  curriculum_subject_prerequisite_edit     GET|POST   ANY      ANY    /curriculum/subject/prerequisite/{id}/edit
-  curriculum_subject_prerequisite_delete   DELETE     ANY      ANY    /curriculum/subject/prerequisite/{id}
-  department_index                         GET        ANY      ANY    /department/
-  department_new                           GET|POST   ANY      ANY    /department/new
-  department_show                          GET        ANY      ANY    /department/{id}
-  department_edit                          GET|POST   ANY      ANY    /department/{id}/edit
-  department_delete                        DELETE     ANY      ANY    /department/{id}
-  employee_index                           GET        ANY      ANY    /employee/
-  employee_new                             GET|POST   ANY      ANY    /employee/new
-  employee_show                            GET        ANY      ANY    /employee/{id}
-  employee_edit                            GET|POST   ANY      ANY    /employee/{id}/edit
-  employee_delete                          DELETE     ANY      ANY    /employee/{id}
-  enrollment_details_index                 GET        ANY      ANY    /enrollment/details/
-  enrollment_details_new                   GET|POST   ANY      ANY    /enrollment/details/new
-  enrollment_details_show                  GET        ANY      ANY    /enrollment/details/{id}
-  enrollment_details_edit                  GET|POST   ANY      ANY    /enrollment/details/{id}/edit
-  enrollment_details_delete                DELETE     ANY      ANY    /enrollment/details/{id}
-  exam_passing_score_index                 GET        ANY      ANY    /exam/passing/score/
-  exam_passing_score_new                   GET|POST   ANY      ANY    /exam/passing/score/new
-  exam_passing_score_show                  GET        ANY      ANY    /exam/passing/score/{id}
-  exam_passing_score_edit                  GET|POST   ANY      ANY    /exam/passing/score/{id}/edit
-  exam_passing_score_delete                DELETE     ANY      ANY    /exam/passing/score/{id}
-  faculty_load_index                       GET        ANY      ANY    /faculty/load/
-  faculty_load_new                         GET|POST   ANY      ANY    /faculty/load/new
-  faculty_load_show                        GET        ANY      ANY    /faculty/load/{id}
-  faculty_load_edit                        GET|POST   ANY      ANY    /faculty/load/{id}/edit
-  faculty_load_delete                      DELETE     ANY      ANY    /faculty/load/{id}
-  room_index                               GET        ANY      ANY    /room/
-  room_new                                 GET|POST   ANY      ANY    /room/new
-  room_show                                GET        ANY      ANY    /room/{id}
-  room_edit                                GET|POST   ANY      ANY    /room/{id}/edit
-  room_delete                              DELETE     ANY      ANY    /room/{id}
-  sample                                   ANY        ANY      ANY    /sample
-  section_index                            GET        ANY      ANY    /section/
-  section_new                              GET|POST   ANY      ANY    /section/new
-  section_show                             GET        ANY      ANY    /section/{id}
-  section_edit                             GET|POST   ANY      ANY    /section/{id}/edit
-  section_delete                           DELETE     ANY      ANY    /section/{id}
-  semester_index                           GET        ANY      ANY    /semester/
-  semester_new                             GET|POST   ANY      ANY    /semester/new
-  semester_show                            GET        ANY      ANY    /semester/{id}
-  semester_edit                            GET|POST   ANY      ANY    /semester/{id}/edit
-  semester_delete                          DELETE     ANY      ANY    /semester/{id}
-  student_index                            GET        ANY      ANY    /student/
-  student_new                              GET|POST   ANY      ANY    /student/new
-  student_show                             GET        ANY      ANY    /student/{id}
-  student_edit                             GET|POST   ANY      ANY    /student/{id}/edit
-  student_delete                           DELETE     ANY      ANY    /student/{id}
-  student_enrolled_subject_index           GET        ANY      ANY    /student/enrolled/subject/
-  student_enrolled_subject_new             GET|POST   ANY      ANY    /student/enrolled/subject/new
-  student_enrolled_subject_show            GET        ANY      ANY    /student/enrolled/subject/{id}
-  student_enrolled_subject_edit            GET|POST   ANY      ANY    /student/enrolled/subject/{id}/edit
-  student_enrolled_subject_delete          DELETE     ANY      ANY    /student/enrolled/subject/{id}
-  student_examinee_index                   GET        ANY      ANY    /student/examinee/
-  student_examinee_new                     GET|POST   ANY      ANY    /student/examinee/new
-  student_examinee_show                    GET        ANY      ANY    /student/examinee/{id}
-  student_examinee_edit                    GET|POST   ANY      ANY    /student/examinee/{id}/edit
-  student_examinee_delete                  DELETE     ANY      ANY    /student/examinee/{id}
-  student_grade_index                      GET        ANY      ANY    /student/grade/
-  student_grade_new                        GET|POST   ANY      ANY    /student/grade/new
-  student_grade_show                       GET        ANY      ANY    /student/grade/{id}
-  student_grade_edit                       GET|POST   ANY      ANY    /student/grade/{id}/edit
-  student_grade_delete                     DELETE     ANY      ANY    /student/grade/{id}
-  student_profiling_details_index          GET        ANY      ANY    /student/profiling/details/
-  student_profiling_details_new            GET|POST   ANY      ANY    /student/profiling/details/new
-  student_profiling_details_show           GET        ANY      ANY    /student/profiling/details/{id}
-  student_profiling_details_edit           GET|POST   ANY      ANY    /student/profiling/details/{id}/edit
-  student_profiling_details_delete         DELETE     ANY      ANY    /student/profiling/details/{id}
-  subject_index                            GET        ANY      ANY    /subject/
-  subject_new                              GET|POST   ANY      ANY    /subject/new
-  subject_show                             GET        ANY      ANY    /subject/{id}
-  subject_edit                             GET|POST   ANY      ANY    /subject/{id}/edit
-  subject_delete                           DELETE     ANY      ANY    /subject/{id}
-  subject_offering_index                   GET        ANY      ANY    /subject/offering/
-  subject_offering_new                     GET|POST   ANY      ANY    /subject/offering/new
-  subject_offering_show                    GET        ANY      ANY    /subject/offering/{id}
-  subject_offering_edit                    GET|POST   ANY      ANY    /subject/offering/{id}/edit
-  subject_offering_delete                  DELETE     ANY      ANY    /subject/offering/{id}
+academic_year_index                      GET        ANY      ANY    /academic/year/
+academic_year_new                        GET|POST   ANY      ANY    /academic/year/new
+academic_year_show                       GET        ANY      ANY    /academic/year/{id}
+academic_year_edit                       GET|POST   ANY      ANY    /academic/year/{id}/edit
+academic_year_delete                     DELETE     ANY      ANY    /academic/year/{id}
+academic_year_instance_index             GET        ANY      ANY    /ay-instance/
+academic_year_instance_new               GET|POST   ANY      ANY    /ay-instance/new
+academic_year_instance_show              GET        ANY      ANY    /ay-instance/{id}
+academic_year_instance_edit              GET|POST   ANY      ANY    /ay-instance/{id}/edit
+academic_year_instance_delete            DELETE     ANY      ANY    /ay-instance/{id}
+added_prof_load_index                    GET        ANY      ANY    /added-prof-load/
+added_prof_load_new                      GET|POST   ANY      ANY    /added-prof-load/new
+added_prof_load_show                     GET        ANY      ANY    /added-prof-load/{id}
+added_prof_load_edit                     GET|POST   ANY      ANY    /added-prof-load/{id}/edit
+added_prof_load_delete                   DELETE     ANY      ANY    /added-prof-load/{id}
+building_index                           GET        ANY      ANY    /building/
+building_new                             GET|POST   ANY      ANY    /building/new
+building_show                            GET        ANY      ANY    /building/{id}
+building_edit                            GET|POST   ANY      ANY    /building/{id}/edit
+building_delete                          DELETE     ANY      ANY    /building/{id}
+college_index                            GET        ANY      ANY    /college/
+college_new                              GET|POST   ANY      ANY    /college/new
+college_show                             GET        ANY      ANY    /college/{id}
+college_edit                             GET|POST   ANY      ANY    /college/{id}/edit
+college_delete                           DELETE     ANY      ANY    /college/{id}
+course_index                             GET        ANY      ANY    /course/
+course_new                               GET|POST   ANY      ANY    /course/new
+course_show                              GET        ANY      ANY    /course/{id}
+course_edit                              GET|POST   ANY      ANY    /course/{id}/edit
+course_delete                            DELETE     ANY      ANY    /course/{id}
+curriculum_index                         GET        ANY      ANY    /curriculum/
+curriculum_new                           GET|POST   ANY      ANY    /curriculum/new
+curriculum_show                          GET        ANY      ANY    /curriculum/{id}
+curriculum_edit                          GET|POST   ANY      ANY    /curriculum/{id}/edit
+curriculum_delete                        DELETE     ANY      ANY    /curriculum/{id}
+curriculum_subject_index                 GET        ANY      ANY    /curriculum-subject/
+curriculum_subject_new                   GET|POST   ANY      ANY    /curriculum-subject/new
+curriculum_subject_show                  GET        ANY      ANY    /curriculum-subject/{id}
+curriculum_subject_edit                  GET|POST   ANY      ANY    /curriculum-subject/{id}/edit
+curriculum_subject_delete                DELETE     ANY      ANY    /curriculum-subject/{id}
+curriculum_subject_equivalence_index     GET        ANY      ANY    /curriculum-subject-equivalence/
+curriculum_subject_equivalence_new       GET|POST   ANY      ANY    /curriculum-subject-equivalence/new
+curriculum_subject_equivalence_show      GET        ANY      ANY    /curriculum-subject-equivalence/{id}
+curriculum_subject_equivalence_edit      GET|POST   ANY      ANY    /curriculum-subject-equivalence/{id}/edit
+curriculum_subject_equivalence_delete    DELETE     ANY      ANY    /curriculum-subject-equivalence/{id}
+curriculum_subject_prerequisite_index    GET        ANY      ANY    /curriculum-subject-prerequisite/
+curriculum_subject_prerequisite_new      GET|POST   ANY      ANY    /curriculum-subject-prerequisite/new
+curriculum_subject_prerequisite_show     GET        ANY      ANY    /curriculum-subject-prerequisite/{id}
+curriculum_subject_prerequisite_edit     GET|POST   ANY      ANY    /curriculum-subject-prerequisite/{id}/edit
+curriculum_subject_prerequisite_delete   DELETE     ANY      ANY    /curriculum-subject-prerequisite/{id}
+department_index                         GET        ANY      ANY    /department/
+department_new                           GET|POST   ANY      ANY    /department/new
+department_show                          GET        ANY      ANY    /department/{id}
+department_edit                          GET|POST   ANY      ANY    /department/{id}/edit
+department_delete                        DELETE     ANY      ANY    /department/{id}
+employee_index                           GET        ANY      ANY    /employee/
+employee_new                             GET|POST   ANY      ANY    /employee/new
+employee_show                            GET        ANY      ANY    /employee/{id}
+employee_edit                            GET|POST   ANY      ANY    /employee/{id}/edit
+employee_delete                          DELETE     ANY      ANY    /employee/{id}
+enrollment_details_index                 GET        ANY      ANY    /enrollment-details/
+enrollment_details_new                   GET|POST   ANY      ANY    /enrollment-details/new
+enrollment_details_show                  GET        ANY      ANY    /enrollment-details/{id}
+enrollment_details_edit                  GET|POST   ANY      ANY    /enrollment-details/{id}/edit
+enrollment_details_delete                DELETE     ANY      ANY    /enrollment-details/{id}
+exam_passing_score_index                 GET        ANY      ANY    /exam-passing-score/
+exam_passing_score_new                   GET|POST   ANY      ANY    /exam-passing-score/new
+exam_passing_score_show                  GET        ANY      ANY    /exam-passing-score/{id}
+exam_passing_score_edit                  GET|POST   ANY      ANY    /exam-passing-score/{id}/edit
+exam_passing_score_delete                DELETE     ANY      ANY    /exam-passing-score/{id}
+faculty_load_index                       GET        ANY      ANY    /faculty-load/
+faculty_load_new                         GET|POST   ANY      ANY    /faculty-load/new
+faculty_load_show                        GET        ANY      ANY    /faculty-load/{id}
+faculty_load_edit                        GET|POST   ANY      ANY    /faculty-load/{id}/edit
+faculty_load_delete                      DELETE     ANY      ANY    /faculty-load/{id}
+room_index                               GET        ANY      ANY    /room/
+room_new                                 GET|POST   ANY      ANY    /room/new
+room_show                                GET        ANY      ANY    /room/{id}
+room_edit                                GET|POST   ANY      ANY    /room/{id}/edit
+room_delete                              DELETE     ANY      ANY    /room/{id}
+section_index                            GET        ANY      ANY    /section/
+section_new                              GET|POST   ANY      ANY    /section/new
+section_show                             GET        ANY      ANY    /section/{id}
+section_edit                             GET|POST   ANY      ANY    /section/{id}/edit
+section_delete                           DELETE     ANY      ANY    /section/{id}
+semester_index                           GET        ANY      ANY    /semester/
+semester_new                             GET|POST   ANY      ANY    /semester/new
+semester_show                            GET        ANY      ANY    /semester/{id}
+semester_edit                            GET|POST   ANY      ANY    /semester/{id}/edit
+semester_delete                          DELETE     ANY      ANY    /semester/{id}
+student_index                            GET        ANY      ANY    /student/
+student_new                              GET|POST   ANY      ANY    /student/new
+student_show                             GET        ANY      ANY    /student/{id}
+student_edit                             GET|POST   ANY      ANY    /student/{id}/edit
+student_delete                           DELETE     ANY      ANY    /student/{id}
+student_enrolled_subject_index           GET        ANY      ANY    /student-enrolled-subjects/
+student_enrolled_subject_new             GET|POST   ANY      ANY    /student-enrolled-subjects/new
+student_enrolled_subject_show            GET        ANY      ANY    /student-enrolled-subjects/{id}
+student_enrolled_subject_edit            GET|POST   ANY      ANY    /student-enrolled-subjects/{id}/edit
+student_enrolled_subject_delete          DELETE     ANY      ANY    /student-enrolled-subjects/{id}
+student_examinee_index                   GET        ANY      ANY    /student-examinee/
+student_examinee_new                     GET|POST   ANY      ANY    /student-examinee/new
+student_examinee_show                    GET        ANY      ANY    /student-examinee/{id}
+student_examinee_edit                    GET|POST   ANY      ANY    /student-examinee/{id}/edit
+student_examinee_delete                  DELETE     ANY      ANY    /student-examinee/{id}
+student_grade_index                      GET        ANY      ANY    /student-grade/
+student_grade_new                        GET|POST   ANY      ANY    /student-grade/new
+student_grade_show                       GET        ANY      ANY    /student-grade/{id}
+student_grade_edit                       GET|POST   ANY      ANY    /student-grade/{id}/edit
+student_grade_delete                     DELETE     ANY      ANY    /student-grade/{id}
+student_profiling_details_index          GET        ANY      ANY    /student-profiling-details/
+student_profiling_details_new            GET|POST   ANY      ANY    /student-profiling-details/new
+student_profiling_details_show           GET        ANY      ANY    /student-profiling-details/{id}
+student_profiling_details_edit           GET|POST   ANY      ANY    /student-profiling-details/{id}/edit
+student_profiling_details_delete         DELETE     ANY      ANY    /student-profiling-details/{id}
+subject_index                            GET        ANY      ANY    /subject/
+subject_new                              GET|POST   ANY      ANY    /subject/new
+subject_show                             GET        ANY      ANY    /subject/{id}
+subject_edit                             GET|POST   ANY      ANY    /subject/{id}/edit
+subject_delete                           DELETE     ANY      ANY    /subject/{id}
+subject_offering_index                   GET        ANY      ANY    /subject-offering/
+subject_offering_new                     GET|POST   ANY      ANY    /subject-offering/new
+subject_offering_show                    GET        ANY      ANY    /subject-offering/{id}
+subject_offering_edit                    GET|POST   ANY      ANY    /subject-offering/{id}/edit
+subject_offering_delete                  DELETE     ANY      ANY    /subject-offering/{id} 

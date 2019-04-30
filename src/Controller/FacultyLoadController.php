@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/faculty/load")
+ * @Route("/faculty-load")
  */
 class FacultyLoadController extends AbstractController
 {

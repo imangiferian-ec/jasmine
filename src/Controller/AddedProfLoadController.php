@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/added/prof/load")
+ * @Route("/added-prof-load")
  */
 class AddedProfLoadController extends AbstractController
 {
