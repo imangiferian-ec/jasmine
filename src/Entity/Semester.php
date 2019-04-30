@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Table(name="semesters")
  * @ORM\Entity(repositoryClass="App\Repository\SemesterPeriodRepository")
  */
 class Semester
@@ -25,11 +26,6 @@ class Semester
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isForHighschool;
 
     public function getId(): ?int
     {
@@ -56,18 +52,6 @@ class Semester
     public function setDescription(?string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getIsForHighschool(): ?bool
-    {
-        return $this->isForHighschool;
-    }
-
-    public function setIsForHighschool(bool $isForHighschool): self
-    {
-        $this->isForHighschool = $isForHighschool;
 
         return $this;
     }

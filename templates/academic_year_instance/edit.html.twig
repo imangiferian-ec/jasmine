@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit AcademicYearInstance{% endblock %}
+
+{% block body %}
+    <h1>Edit AcademicYearInstance</h1>
+
+    {{ include('academic_year_instance/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('academic_year_instance_index') }}">back to list</a>
+
+    {{ include('academic_year_instance/_delete_form.html.twig') }}
+{% endblock %}

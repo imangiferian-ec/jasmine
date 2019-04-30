@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AcademicYearInstance{% endblock %}
+
+{% block body %}
+    <h1>AcademicYearInstance</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ academic_year_instance.id }}</td>
+            </tr>
+            <tr>
+                <th>SemesterStartDate</th>
+                <td>{{ academic_year_instance.semesterStartDate ? academic_year_instance.semesterStartDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>EnrollmentStartDate</th>
+                <td>{{ academic_year_instance.enrollmentStartDate ? academic_year_instance.enrollmentStartDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>EnrollmentEndDate</th>
+                <td>{{ academic_year_instance.enrollmentEndDate ? academic_year_instance.enrollmentEndDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Remarks</th>
+                <td>{{ academic_year_instance.remarks }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ academic_year_instance.status }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('academic_year_instance_index') }}">back to list</a>
+
+    <a href="{{ path('academic_year_instance_edit', {'id': academic_year_instance.id}) }}">edit</a>
+
+    {{ include('academic_year_instance/_delete_form.html.twig') }}
+{% endblock %}

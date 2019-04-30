@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AcademicYear{% endblock %}
+
+{% block body %}
+    <h1>AcademicYear</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ academic_year.id }}</td>
+            </tr>
+            <tr>
+                <th>AyStartYear</th>
+                <td>{{ academic_year.ayStartYear }}</td>
+            </tr>
+            <tr>
+                <th>AyEndYear</th>
+                <td>{{ academic_year.ayEndYear }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ academic_year.status }}</td>
+            </tr>
+            <tr>
+                <th>IsAcceptingExaminee</th>
+                <td>{{ academic_year.isAcceptingExaminee ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('academic_year_index') }}">back to list</a>
+
+    <a href="{{ path('academic_year_edit', {'id': academic_year.id}) }}">edit</a>
+
+    {{ include('academic_year/_delete_form.html.twig') }}
+{% endblock %}

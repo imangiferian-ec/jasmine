@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CurriculumSubjectEquivalence index{% endblock %}
+
+{% block body %}
+    <h1>CurriculumSubjectEquivalence index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>SubjectEquivalence</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for curriculum_subject_equivalence in curriculum_subject_equivalences %}
+            <tr>
+                <td>{{ curriculum_subject_equivalence.id }}</td>
+                <td>{{ curriculum_subject_equivalence.subjectEquivalence ? curriculum_subject_equivalence.subjectEquivalence|json_encode : '' }}</td>
+                <td>
+                    <a href="{{ path('curriculum_subject_equivalence_show', {'id': curriculum_subject_equivalence.id}) }}">show</a>
+                    <a href="{{ path('curriculum_subject_equivalence_edit', {'id': curriculum_subject_equivalence.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('curriculum_subject_equivalence_new') }}">Create new</a>
+{% endblock %}

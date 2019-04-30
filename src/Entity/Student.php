@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Table(name="students")
  * @ORM\Entity(repositoryClass="App\Repository\StudentRepository")
  */
 class Student
@@ -167,6 +168,18 @@ class Student
      * @ORM\JoinColumn(nullable=false)
      */
     private $studentExaminee;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $profiller;
 
     public function getId(): ?int
     {
@@ -529,6 +542,30 @@ class Student
     public function setStudentExaminee(StudentExaminee $studentExaminee): self
     {
         $this->studentExaminee = $studentExaminee;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getProfiller(): ?User
+    {
+        return $this->profiller;
+    }
+
+    public function setProfiller(?User $profiller): self
+    {
+        $this->profiller = $profiller;
 
         return $this;
     }

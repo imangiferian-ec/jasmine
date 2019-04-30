@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Table(name="enrollment_details")
  * @ORM\Entity(repositoryClass="App\Repository\EnrollmentDetailsRepository")
  */
 class EnrollmentDetails
@@ -90,6 +91,12 @@ class EnrollmentDetails
      * @ORM\Column(type="boolean")
      */
     private $isFinalalized;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $enrollingOfficer;
 
     public function getId(): ?int
     {
@@ -260,6 +267,18 @@ class EnrollmentDetails
     public function setIsFinalalized(bool $isFinalalized): self
     {
         $this->isFinalalized = $isFinalalized;
+
+        return $this;
+    }
+
+    public function getEnrollingOfficer(): ?User
+    {
+        return $this->enrollingOfficer;
+    }
+
+    public function setEnrollingOfficer(?User $enrollingOfficer): self
+    {
+        $this->enrollingOfficer = $enrollingOfficer;
 
         return $this;
     }

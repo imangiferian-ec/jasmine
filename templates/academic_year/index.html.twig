@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AcademicYear index{% endblock %}
+
+{% block body %}
+    <h1>AcademicYear index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>AyStartYear</th>
+                <th>AyEndYear</th>
+                <th>Status</th>
+                <th>IsAcceptingExaminee</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for academic_year in academic_years %}
+            <tr>
+                <td>{{ academic_year.id }}</td>
+                <td>{{ academic_year.ayStartYear }}</td>
+                <td>{{ academic_year.ayEndYear }}</td>
+                <td>{{ academic_year.status }}</td>
+                <td>{{ academic_year.isAcceptingExaminee ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('academic_year_show', {'id': academic_year.id}) }}">show</a>
+                    <a href="{{ path('academic_year_edit', {'id': academic_year.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('academic_year_new') }}">Create new</a>
+{% endblock %}

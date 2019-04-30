@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FacultyLoad{% endblock %}
+
+{% block body %}
+    <h1>FacultyLoad</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ faculty_load.id }}</td>
+            </tr>
+            <tr>
+                <th>IsGradeSubmitted</th>
+                <td>{{ faculty_load.isGradeSubmitted ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>GradeSaveAt</th>
+                <td>{{ faculty_load.gradeSaveAt ? faculty_load.gradeSaveAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>GradeSubmittedAt</th>
+                <td>{{ faculty_load.gradeSubmittedAt ? faculty_load.gradeSubmittedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>GradeUpdatedAt</th>
+                <td>{{ faculty_load.gradeUpdatedAt ? faculty_load.gradeUpdatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>IsGradeFinalized</th>
+                <td>{{ faculty_load.isGradeFinalized ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>DateGradeFinalized</th>
+                <td>{{ faculty_load.dateGradeFinalized ? faculty_load.dateGradeFinalized|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>GradeFinalizedAt</th>
+                <td>{{ faculty_load.gradeFinalizedAt ? faculty_load.gradeFinalizedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('faculty_load_index') }}">back to list</a>
+
+    <a href="{{ path('faculty_load_edit', {'id': faculty_load.id}) }}">edit</a>
+
+    {{ include('faculty_load/_delete_form.html.twig') }}
+{% endblock %}

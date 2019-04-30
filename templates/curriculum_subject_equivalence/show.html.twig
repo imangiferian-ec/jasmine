@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CurriculumSubjectEquivalence{% endblock %}
+
+{% block body %}
+    <h1>CurriculumSubjectEquivalence</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ curriculum_subject_equivalence.id }}</td>
+            </tr>
+            <tr>
+                <th>SubjectEquivalence</th>
+                <td>{{ curriculum_subject_equivalence.subjectEquivalence ? curriculum_subject_equivalence.subjectEquivalence|json_encode : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('curriculum_subject_equivalence_index') }}">back to list</a>
+
+    <a href="{{ path('curriculum_subject_equivalence_edit', {'id': curriculum_subject_equivalence.id}) }}">edit</a>
+
+    {{ include('curriculum_subject_equivalence/_delete_form.html.twig') }}
+{% endblock %}

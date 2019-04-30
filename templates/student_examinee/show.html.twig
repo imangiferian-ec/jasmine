@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}StudentExaminee{% endblock %}
+
+{% block body %}
+    <h1>StudentExaminee</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ student_examinee.id }}</td>
+            </tr>
+            <tr>
+                <th>ExamineeNo</th>
+                <td>{{ student_examinee.examineeNo }}</td>
+            </tr>
+            <tr>
+                <th>ExaminationDate</th>
+                <td>{{ student_examinee.examinationDate ? student_examinee.examinationDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Venue</th>
+                <td>{{ student_examinee.venue }}</td>
+            </tr>
+            <tr>
+                <th>ExaminationTime</th>
+                <td>{{ student_examinee.examinationTime ? student_examinee.examinationTime|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>LastName</th>
+                <td>{{ student_examinee.lastName }}</td>
+            </tr>
+            <tr>
+                <th>FirstName</th>
+                <td>{{ student_examinee.firstName }}</td>
+            </tr>
+            <tr>
+                <th>MiddleName</th>
+                <td>{{ student_examinee.middleName }}</td>
+            </tr>
+            <tr>
+                <th>ExtentionName</th>
+                <td>{{ student_examinee.extentionName }}</td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>{{ student_examinee.gender }}</td>
+            </tr>
+            <tr>
+                <th>ContactNo</th>
+                <td>{{ student_examinee.contactNo }}</td>
+            </tr>
+            <tr>
+                <th>BirthDate</th>
+                <td>{{ student_examinee.birthDate ? student_examinee.birthDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>BirthPlace</th>
+                <td>{{ student_examinee.birthPlace }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ student_examinee.address }}</td>
+            </tr>
+            <tr>
+                <th>LastSchoolAttended</th>
+                <td>{{ student_examinee.lastSchoolAttended }}</td>
+            </tr>
+            <tr>
+                <th>LastSchoolAddress</th>
+                <td>{{ student_examinee.lastSchoolAddress }}</td>
+            </tr>
+            <tr>
+                <th>ExaminationScore</th>
+                <td>{{ student_examinee.examinationScore }}</td>
+            </tr>
+            <tr>
+                <th>ProfilingStatus</th>
+                <td>{{ student_examinee.profilingStatus }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('student_examinee_index') }}">back to list</a>
+
+    <a href="{{ path('student_examinee_edit', {'id': student_examinee.id}) }}">edit</a>
+
+    {{ include('student_examinee/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EnrollmentDetails index{% endblock %}
+
+{% block body %}
+    <h1>EnrollmentDetails index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>StudentPicture</th>
+                <th>DateEnrolled</th>
+                <th>Remarks</th>
+                <th>IsBalikAral</th>
+                <th>IsTransferee</th>
+                <th>IsCrossEnrollee</th>
+                <th>IsFullyPaid</th>
+                <th>IsMedicallyCleared</th>
+                <th>IsFinalalized</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for enrollment_detail in enrollment_details %}
+            <tr>
+                <td>{{ enrollment_detail.id }}</td>
+                <td>{{ enrollment_detail.studentPicture }}</td>
+                <td>{{ enrollment_detail.dateEnrolled ? enrollment_detail.dateEnrolled|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ enrollment_detail.remarks }}</td>
+                <td>{{ enrollment_detail.isBalikAral ? 'Yes' : 'No' }}</td>
+                <td>{{ enrollment_detail.isTransferee ? 'Yes' : 'No' }}</td>
+                <td>{{ enrollment_detail.isCrossEnrollee ? 'Yes' : 'No' }}</td>
+                <td>{{ enrollment_detail.isFullyPaid ? 'Yes' : 'No' }}</td>
+                <td>{{ enrollment_detail.isMedicallyCleared ? 'Yes' : 'No' }}</td>
+                <td>{{ enrollment_detail.isFinalalized ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('enrollment_details_show', {'id': enrollment_detail.id}) }}">show</a>
+                    <a href="{{ path('enrollment_details_edit', {'id': enrollment_detail.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('enrollment_details_new') }}">Create new</a>
+{% endblock %}

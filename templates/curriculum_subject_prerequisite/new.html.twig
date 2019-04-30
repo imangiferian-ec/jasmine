@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New CurriculumSubjectPrerequisite{% endblock %}
+
+{% block body %}
+    <h1>Create new CurriculumSubjectPrerequisite</h1>
+
+    {{ include('curriculum_subject_prerequisite/_form.html.twig') }}
+
+    <a href="{{ path('curriculum_subject_prerequisite_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CurriculumSubjectPrerequisite{% endblock %}
+
+{% block body %}
+    <h1>CurriculumSubjectPrerequisite</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ curriculum_subject_prerequisite.id }}</td>
+            </tr>
+            <tr>
+                <th>SubjectPrerequisite</th>
+                <td>{{ curriculum_subject_prerequisite.subjectPrerequisite ? curriculum_subject_prerequisite.subjectPrerequisite|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Remarks</th>
+                <td>{{ curriculum_subject_prerequisite.remarks }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('curriculum_subject_prerequisite_index') }}">back to list</a>
+
+    <a href="{{ path('curriculum_subject_prerequisite_edit', {'id': curriculum_subject_prerequisite.id}) }}">edit</a>
+
+    {{ include('curriculum_subject_prerequisite/_delete_form.html.twig') }}
+{% endblock %}

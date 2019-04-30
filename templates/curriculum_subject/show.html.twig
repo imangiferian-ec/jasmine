@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CurriculumSubject{% endblock %}
+
+{% block body %}
+    <h1>CurriculumSubject</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ curriculum_subject.id }}</td>
+            </tr>
+            <tr>
+                <th>YearLevel</th>
+                <td>{{ curriculum_subject.yearLevel }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('curriculum_subject_index') }}">back to list</a>
+
+    <a href="{{ path('curriculum_subject_edit', {'id': curriculum_subject.id}) }}">edit</a>
+
+    {{ include('curriculum_subject/_delete_form.html.twig') }}
+{% endblock %}

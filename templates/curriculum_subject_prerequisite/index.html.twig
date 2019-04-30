@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CurriculumSubjectPrerequisite index{% endblock %}
+
+{% block body %}
+    <h1>CurriculumSubjectPrerequisite index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>SubjectPrerequisite</th>
+                <th>Remarks</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for curriculum_subject_prerequisite in curriculum_subject_prerequisites %}
+            <tr>
+                <td>{{ curriculum_subject_prerequisite.id }}</td>
+                <td>{{ curriculum_subject_prerequisite.subjectPrerequisite ? curriculum_subject_prerequisite.subjectPrerequisite|json_encode : '' }}</td>
+                <td>{{ curriculum_subject_prerequisite.remarks }}</td>
+                <td>
+                    <a href="{{ path('curriculum_subject_prerequisite_show', {'id': curriculum_subject_prerequisite.id}) }}">show</a>
+                    <a href="{{ path('curriculum_subject_prerequisite_edit', {'id': curriculum_subject_prerequisite.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('curriculum_subject_prerequisite_new') }}">Create new</a>
+{% endblock %}

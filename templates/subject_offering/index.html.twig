@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SubjectOffering index{% endblock %}
+
+{% block body %}
+    <h1>SubjectOffering index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Labday</th>
+                <th>LabdayTime</th>
+                <th>LectureDay</th>
+                <th>LectureDayTime</th>
+                <th>AllowedNoStudent</th>
+                <th>Status</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for subject_offering in subject_offerings %}
+            <tr>
+                <td>{{ subject_offering.id }}</td>
+                <td>{{ subject_offering.labday }}</td>
+                <td>{{ subject_offering.labdayTime }}</td>
+                <td>{{ subject_offering.lectureDay }}</td>
+                <td>{{ subject_offering.lectureDayTime }}</td>
+                <td>{{ subject_offering.allowedNoStudent }}</td>
+                <td>{{ subject_offering.status }}</td>
+                <td>
+                    <a href="{{ path('subject_offering_show', {'id': subject_offering.id}) }}">show</a>
+                    <a href="{{ path('subject_offering_edit', {'id': subject_offering.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('subject_offering_new') }}">Create new</a>
+{% endblock %}

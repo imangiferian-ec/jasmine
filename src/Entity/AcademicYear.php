@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Table(name="academic_years")
  * @ORM\Entity(repositoryClass="App\Repository\AcademicYearRepository")
  */
 class AcademicYear
@@ -88,4 +89,12 @@ class AcademicYear
 
         return $this;
     }
+
+    public function __toString(){
+        // to show the name of the Category in the select
+        return $this->ayStartYear . ' - ' . $this->ayEndYear;
+        // to show the id of the Category in the select
+        // return $this->id;
+    }
+
 }

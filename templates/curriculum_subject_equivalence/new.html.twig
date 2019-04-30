@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New CurriculumSubjectEquivalence{% endblock %}
+
+{% block body %}
+    <h1>Create new CurriculumSubjectEquivalence</h1>
+
+    {{ include('curriculum_subject_equivalence/_form.html.twig') }}
+
+    <a href="{{ path('curriculum_subject_equivalence_index') }}">back to list</a>
+{% endblock %}

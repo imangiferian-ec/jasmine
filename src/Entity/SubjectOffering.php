@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Table(name="subject_offerings")
  * @ORM\Entity(repositoryClass="App\Repository\SubjectOfferingRepository")
  */
 class SubjectOffering
@@ -81,6 +82,18 @@ class SubjectOffering
      * @ORM\Column(type="string", length=1)
      */
     private $status;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $gradeSubmittedBy;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $gradeFinalizedBy;
 
     public function getId(): ?int
     {
@@ -227,6 +240,30 @@ class SubjectOffering
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getGradeSubmittedBy(): ?User
+    {
+        return $this->gradeSubmittedBy;
+    }
+
+    public function setGradeSubmittedBy(?User $gradeSubmittedBy): self
+    {
+        $this->gradeSubmittedBy = $gradeSubmittedBy;
+
+        return $this;
+    }
+
+    public function getGradeFinalizedBy(): ?User
+    {
+        return $this->gradeFinalizedBy;
+    }
+
+    public function setGradeFinalizedBy(?User $gradeFinalizedBy): self
+    {
+        $this->gradeFinalizedBy = $gradeFinalizedBy;
 
         return $this;
     }

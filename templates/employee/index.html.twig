@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Employee index{% endblock %}
+
+{% block body %}
+    <h1>Employee index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>EmployeeNo</th>
+                <th>EmployeeImage</th>
+                <th>TitlePrefix</th>
+                <th>LastName</th>
+                <th>FirstName</th>
+                <th>MiddleName</th>
+                <th>ExtensionName</th>
+                <th>TitleSuffix</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>ContactNo</th>
+                <th>Gender</th>
+                <th>BirthDate</th>
+                <th>BirthPlace</th>
+                <th>CivilStatus</th>
+                <th>MaidenName</th>
+                <th>Height</th>
+                <th>Weight</th>
+                <th>Religion</th>
+                <th>DateEmployed</th>
+                <th>Status</th>
+                <th>IsFaculty</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for employee in employees %}
+            <tr>
+                <td>{{ employee.id }}</td>
+                <td>{{ employee.employeeNo }}</td>
+                <td>{{ employee.employeeImage }}</td>
+                <td>{{ employee.titlePrefix }}</td>
+                <td>{{ employee.lastName }}</td>
+                <td>{{ employee.firstName }}</td>
+                <td>{{ employee.middleName }}</td>
+                <td>{{ employee.extensionName }}</td>
+                <td>{{ employee.titleSuffix }}</td>
+                <td>{{ employee.address }}</td>
+                <td>{{ employee.email }}</td>
+                <td>{{ employee.contactNo }}</td>
+                <td>{{ employee.gender }}</td>
+                <td>{{ employee.birthDate ? employee.birthDate|date('Y-m-d') : '' }}</td>
+                <td>{{ employee.birthPlace }}</td>
+                <td>{{ employee.civilStatus }}</td>
+                <td>{{ employee.maidenName }}</td>
+                <td>{{ employee.height }}</td>
+                <td>{{ employee.weight }}</td>
+                <td>{{ employee.religion }}</td>
+                <td>{{ employee.dateEmployed ? employee.dateEmployed|date('Y-m-d') : '' }}</td>
+                <td>{{ employee.status }}</td>
+                <td>{{ employee.isFaculty ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('employee_show', {'id': employee.id}) }}">show</a>
+                    <a href="{{ path('employee_edit', {'id': employee.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="24">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('employee_new') }}">Create new</a>
+{% endblock %}

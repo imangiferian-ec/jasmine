@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}StudentEnrolledSubject index{% endblock %}
+
+{% block body %}
+    <h1>StudentEnrolledSubject index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateEnrolled</th>
+                <th>IsAddedSubject</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for student_enrolled_subject in student_enrolled_subjects %}
+            <tr>
+                <td>{{ student_enrolled_subject.id }}</td>
+                <td>{{ student_enrolled_subject.dateEnrolled ? student_enrolled_subject.dateEnrolled|date('Y-m-d') : '' }}</td>
+                <td>{{ student_enrolled_subject.isAddedSubject ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('student_enrolled_subject_show', {'id': student_enrolled_subject.id}) }}">show</a>
+                    <a href="{{ path('student_enrolled_subject_edit', {'id': student_enrolled_subject.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('student_enrolled_subject_new') }}">Create new</a>
+{% endblock %}

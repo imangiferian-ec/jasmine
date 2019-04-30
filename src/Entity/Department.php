@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Table(name="departments")
  * @ORM\Entity(repositoryClass="App\Repository\DepartmentRepository")
  */
 class Department
@@ -35,6 +36,12 @@ class Department
      * @ORM\ManyToOne(targetEntity="App\Entity\College")
      */
     private $college;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $departmentHead;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="department")
@@ -89,6 +96,18 @@ class Department
     public function setCollege(?College $college): self
     {
         $this->college = $college;
+
+        return $this;
+    }
+
+    public function getDepartmentHead(): ?User
+    {
+        return $this->departmentHead;
+    }
+
+    public function setDepartmentHead(?User $departmentHead): self
+    {
+        $this->departmentHead = $departmentHead;
 
         return $this;
     }

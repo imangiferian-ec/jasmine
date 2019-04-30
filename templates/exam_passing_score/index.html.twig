@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ExamPassingScore index{% endblock %}
+
+{% block body %}
+    <h1>ExamPassingScore index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Score</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for exam_passing_score in exam_passing_scores %}
+            <tr>
+                <td>{{ exam_passing_score.id }}</td>
+                <td>{{ exam_passing_score.score }}</td>
+                <td>
+                    <a href="{{ path('exam_passing_score_show', {'id': exam_passing_score.id}) }}">show</a>
+                    <a href="{{ path('exam_passing_score_edit', {'id': exam_passing_score.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('exam_passing_score_new') }}">Create new</a>
+{% endblock %}

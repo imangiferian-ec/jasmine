@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}StudentGrade index{% endblock %}
+
+{% block body %}
+    <h1>StudentGrade index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for student_grade in student_grades %}
+            <tr>
+                <td>{{ student_grade.id }}</td>
+                <td>
+                    <a href="{{ path('student_grade_show', {'id': student_grade.id}) }}">show</a>
+                    <a href="{{ path('student_grade_edit', {'id': student_grade.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('student_grade_new') }}">Create new</a>
+{% endblock %}

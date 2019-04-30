@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Table(name="employees")
  * @ORM\Entity(repositoryClass="App\Repository\EmployeeRepository")
  */
 class Employee
@@ -131,6 +132,12 @@ class Employee
      * @ORM\Column(type="boolean")
      */
     private $isFaculty;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function getId(): ?int
     {
@@ -409,6 +416,18 @@ class Employee
     public function setIsFaculty(bool $isFaculty): self
     {
         $this->isFaculty = $isFaculty;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

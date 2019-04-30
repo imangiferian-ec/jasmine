@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}StudentProfilingDetails index{% endblock %}
+
+{% block body %}
+    <h1>StudentProfilingDetails index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateProfiled</th>
+                <th>Remarks</th>
+                <th>Status</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for student_profiling_detail in student_profiling_details %}
+            <tr>
+                <td>{{ student_profiling_detail.id }}</td>
+                <td>{{ student_profiling_detail.dateProfiled ? student_profiling_detail.dateProfiled|date('Y-m-d') : '' }}</td>
+                <td>{{ student_profiling_detail.remarks }}</td>
+                <td>{{ student_profiling_detail.status }}</td>
+                <td>
+                    <a href="{{ path('student_profiling_details_show', {'id': student_profiling_detail.id}) }}">show</a>
+                    <a href="{{ path('student_profiling_details_edit', {'id': student_profiling_detail.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('student_profiling_details_new') }}">Create new</a>
+{% endblock %}

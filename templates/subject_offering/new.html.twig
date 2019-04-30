@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New SubjectOffering{% endblock %}
+
+{% block body %}
+    <h1>Create new SubjectOffering</h1>
+
+    {{ include('subject_offering/_form.html.twig') }}
+
+    <a href="{{ path('subject_offering_index') }}">back to list</a>
+{% endblock %}

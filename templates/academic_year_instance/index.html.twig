@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AcademicYearInstance index{% endblock %}
+
+{% block body %}
+    <h1>AcademicYearInstance index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>SemesterStartDate</th>
+                <th>EnrollmentStartDate</th>
+                <th>EnrollmentEndDate</th>
+                <th>Remarks</th>
+                <th>Status</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for academic_year_instance in academic_year_instances %}
+            <tr>
+                <td>{{ academic_year_instance.id }}</td>
+                <td>{{ academic_year_instance.semesterStartDate ? academic_year_instance.semesterStartDate|date('Y-m-d') : '' }}</td>
+                <td>{{ academic_year_instance.enrollmentStartDate ? academic_year_instance.enrollmentStartDate|date('Y-m-d') : '' }}</td>
+                <td>{{ academic_year_instance.enrollmentEndDate ? academic_year_instance.enrollmentEndDate|date('Y-m-d') : '' }}</td>
+                <td>{{ academic_year_instance.remarks }}</td>
+                <td>{{ academic_year_instance.status }}</td>
+                <td>
+                    <a href="{{ path('academic_year_instance_show', {'id': academic_year_instance.id}) }}">show</a>
+                    <a href="{{ path('academic_year_instance_edit', {'id': academic_year_instance.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('academic_year_instance_new') }}">Create new</a>
+{% endblock %}

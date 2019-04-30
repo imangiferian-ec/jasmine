@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}StudentExaminee index{% endblock %}
+
+{% block body %}
+    <h1>StudentExaminee index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>ExamineeNo</th>
+                <th>ExaminationDate</th>
+                <th>Venue</th>
+                <th>ExaminationTime</th>
+                <th>LastName</th>
+                <th>FirstName</th>
+                <th>MiddleName</th>
+                <th>ExtentionName</th>
+                <th>Gender</th>
+                <th>ContactNo</th>
+                <th>BirthDate</th>
+                <th>BirthPlace</th>
+                <th>Address</th>
+                <th>LastSchoolAttended</th>
+                <th>LastSchoolAddress</th>
+                <th>ExaminationScore</th>
+                <th>ProfilingStatus</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for student_examinee in student_examinees %}
+            <tr>
+                <td>{{ student_examinee.id }}</td>
+                <td>{{ student_examinee.examineeNo }}</td>
+                <td>{{ student_examinee.examinationDate ? student_examinee.examinationDate|date('Y-m-d') : '' }}</td>
+                <td>{{ student_examinee.venue }}</td>
+                <td>{{ student_examinee.examinationTime ? student_examinee.examinationTime|date('H:i:s') : '' }}</td>
+                <td>{{ student_examinee.lastName }}</td>
+                <td>{{ student_examinee.firstName }}</td>
+                <td>{{ student_examinee.middleName }}</td>
+                <td>{{ student_examinee.extentionName }}</td>
+                <td>{{ student_examinee.gender }}</td>
+                <td>{{ student_examinee.contactNo }}</td>
+                <td>{{ student_examinee.birthDate ? student_examinee.birthDate|date('Y-m-d') : '' }}</td>
+                <td>{{ student_examinee.birthPlace }}</td>
+                <td>{{ student_examinee.address }}</td>
+                <td>{{ student_examinee.lastSchoolAttended }}</td>
+                <td>{{ student_examinee.lastSchoolAddress }}</td>
+                <td>{{ student_examinee.examinationScore }}</td>
+                <td>{{ student_examinee.profilingStatus }}</td>
+                <td>
+                    <a href="{{ path('student_examinee_show', {'id': student_examinee.id}) }}">show</a>
+                    <a href="{{ path('student_examinee_edit', {'id': student_examinee.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="19">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('student_examinee_new') }}">Create new</a>
+{% endblock %}

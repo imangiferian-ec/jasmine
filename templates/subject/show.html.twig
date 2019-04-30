@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Subject{% endblock %}
+
+{% block body %}
+    <h1>Subject</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ subject.id }}</td>
+            </tr>
+            <tr>
+                <th>SubjectCode</th>
+                <td>{{ subject.subjectCode }}</td>
+            </tr>
+            <tr>
+                <th>SubjectTitle</th>
+                <td>{{ subject.subjectTitle }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ subject.description }}</td>
+            </tr>
+            <tr>
+                <th>Units</th>
+                <td>{{ subject.units }}</td>
+            </tr>
+            <tr>
+                <th>LectureHour</th>
+                <td>{{ subject.lectureHour }}</td>
+            </tr>
+            <tr>
+                <th>LabHour</th>
+                <td>{{ subject.labHour }}</td>
+            </tr>
+            <tr>
+                <th>IsForHighschool</th>
+                <td>{{ subject.isForHighschool ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('subject_index') }}">back to list</a>
+
+    <a href="{{ path('subject_edit', {'id': subject.id}) }}">edit</a>
+
+    {{ include('subject/_delete_form.html.twig') }}
+{% endblock %}

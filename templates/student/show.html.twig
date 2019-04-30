@@ -1,0 +1,134 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Student{% endblock %}
+
+{% block body %}
+    <h1>Student</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ student.id }}</td>
+            </tr>
+            <tr>
+                <th>StudentNo</th>
+                <td>{{ student.studentNo }}</td>
+            </tr>
+            <tr>
+                <th>LastName</th>
+                <td>{{ student.lastName }}</td>
+            </tr>
+            <tr>
+                <th>FirstName</th>
+                <td>{{ student.firstName }}</td>
+            </tr>
+            <tr>
+                <th>MiddleName</th>
+                <td>{{ student.middleName }}</td>
+            </tr>
+            <tr>
+                <th>ExtensionName</th>
+                <td>{{ student.extensionName }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ student.address }}</td>
+            </tr>
+            <tr>
+                <th>Barangay</th>
+                <td>{{ student.barangay }}</td>
+            </tr>
+            <tr>
+                <th>ContactNo</th>
+                <td>{{ student.contactNo }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ student.email }}</td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>{{ student.gender }}</td>
+            </tr>
+            <tr>
+                <th>BirthDate</th>
+                <td>{{ student.birthDate ? student.birthDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>BirthPlace</th>
+                <td>{{ student.birthPlace }}</td>
+            </tr>
+            <tr>
+                <th>CivilStatus</th>
+                <td>{{ student.civilStatus }}</td>
+            </tr>
+            <tr>
+                <th>Religion</th>
+                <td>{{ student.religion }}</td>
+            </tr>
+            <tr>
+                <th>Height</th>
+                <td>{{ student.height }}</td>
+            </tr>
+            <tr>
+                <th>Weight</th>
+                <td>{{ student.weight }}</td>
+            </tr>
+            <tr>
+                <th>YearProfiled</th>
+                <td>{{ student.yearProfiled }}</td>
+            </tr>
+            <tr>
+                <th>FatherName</th>
+                <td>{{ student.fatherName }}</td>
+            </tr>
+            <tr>
+                <th>FatherOccupation</th>
+                <td>{{ student.fatherOccupation }}</td>
+            </tr>
+            <tr>
+                <th>MotherName</th>
+                <td>{{ student.motherName }}</td>
+            </tr>
+            <tr>
+                <th>MotherOccupation</th>
+                <td>{{ student.motherOccupation }}</td>
+            </tr>
+            <tr>
+                <th>Guadian</th>
+                <td>{{ student.guadian }}</td>
+            </tr>
+            <tr>
+                <th>RelationGuardian</th>
+                <td>{{ student.relationGuardian }}</td>
+            </tr>
+            <tr>
+                <th>GuardianContactNo</th>
+                <td>{{ student.guardianContactNo }}</td>
+            </tr>
+            <tr>
+                <th>MaidenName</th>
+                <td>{{ student.maidenName }}</td>
+            </tr>
+            <tr>
+                <th>Voter_id</th>
+                <td>{{ student.voterId }}</td>
+            </tr>
+            <tr>
+                <th>PersonToNotify</th>
+                <td>{{ student.personToNotify }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ student.status }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('student_index') }}">back to list</a>
+
+    <a href="{{ path('student_edit', {'id': student.id}) }}">edit</a>
+
+    {{ include('student/_delete_form.html.twig') }}
+{% endblock %}

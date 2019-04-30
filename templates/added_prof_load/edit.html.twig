@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit AddedProfLoad{% endblock %}
+
+{% block body %}
+    <h1>Edit AddedProfLoad</h1>
+
+    {{ include('added_prof_load/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('added_prof_load_index') }}">back to list</a>
+
+    {{ include('added_prof_load/_delete_form.html.twig') }}
+{% endblock %}
