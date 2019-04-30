@@ -1,4 +1,47 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<hr>
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    {{ form_start(form) }}
+    <div class="form-group">
+        <i class="fa fa-calendar"></i>
+        {{ form_label(form.ayStartYear, null, {
+          'label': 'AY Start Year',
+        }) }}
+        {{ form_widget(form.ayStartYear, {'attr': {'value': 'now'|date("Y"),'class': 'form-control'}}) }}
+        <small>{{ form_help(form.ayStartYear) }}</small>
+        <div class="form-error">
+            {{ form_errors(form.ayStartYear) }}
+        </div>
+    </div>
+    <div class="form-group">
+        <i class="fa fa-calendar"></i>
+        {{ form_label(form.ayEndYear, null, {
+          'label': 'AY End Year',
+        }) }}
+        {{ form_widget(form.ayEndYear, {'attr': {'value': 'now'|date("Y") + 1, 'class': 'form-control'}}) }}
+        <small>{{ form_help(form.ayEndYear) }}</small>
+        <div class="form-error">
+            {{ form_errors(form.ayEndYear) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.status, null, {
+          'label': 'Status',
+        }) }}
+        {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
+        <small>{{ form_help(form.status) }}</small>
+        <div class="form-error">
+            {{ form_errors(form.status) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_widget(form.isAcceptingExaminee) }}
+        {{ form_label(form.isAcceptingExaminee, null, {
+        'label': 'Is Accepting Examinee',
+        }) }}
+    </div>
+        <button type="submit" class="btn btn-primary float-right">{{ button_label|default('Save New Academic Year') }}</button>
+    {{ form_end(form) }}
+  </div>
+</div>
+<hr>

@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New AcademicYear{% endblock %}
+{% block title %}New Academic Year{% endblock %}
 
 {% block body %}
-    <h1>Create new AcademicYear</h1>
+    <h1>Create new Academic Year</h1>
+    <a href="{{ path('academic_year_index') }}">back to list</a>
 
     {{ include('academic_year/_form.html.twig') }}
 
-    <a href="{{ path('academic_year_index') }}">back to list</a>
 {% endblock %}

@@ -6,6 +6,7 @@ use App\Entity\AcademicYear;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class AcademicYearType extends AbstractType
 {
@@ -14,7 +15,12 @@ class AcademicYearType extends AbstractType
         $builder
             ->add('ayStartYear')
             ->add('ayEndYear')
-            ->add('status')
+            ->add('status', ChoiceType::class, [
+                  'choices'  => [
+                      'Active' => 'a',
+                      'Inactive' => 'i',
+                  ],
+              ])
             ->add('isAcceptingExaminee')
         ;
     }

@@ -1,0 +1,80 @@
+Task: CRUD for buildings
+ - go to http://localhost:8000/building/
+ - open templates/building/index.html.twig
+    ito yong view para sa building list / building index (modify it)
+    ito ang modifications ko
+
+    {% block title %}Building List{% endblock %} -> {% block title %}List of Building{% endblock %}
+    <h1>Building index</h1> -> <h1>List of Building</h1>
+    <table class="table"> -> <table class="table table-bordered">
+    <th>id</th> -> <th>#</th>
+    added {% set cnt = 0 %}
+    <td>{{ building.id }}</td> _> <td>{{ cnt + 1 }}</td>
+    added {% set cnt = cnt + 1 %}
+
+    <a href="{{ path('building_show', {'id': building.id}) }}">show</a>
+    <a href="{{ path('building_edit', {'id': building.id}) }}">edit</a>
+    to
+    <a class="btn btn-info btn-md" href="{{ path('building_show', {'id': building.id}) }}">show</a>
+    <a class="btn btn-warning btn-md" href="{{ path('building_edit', {'id': building.id}) }}">edit</a>
+
+    <a href="{{ path('building_new') }}">Create new</a>
+    to
+    <a class="btn btn-primary btn-md" href="{{ path('building_new') }}">Create new</a>
+
+ - Click "Create new building" button
+  note: lahat ng form builder ay nasa src/Forms
+
+ - Open templates/building/_form.html.twig
+  ito ang original code ng templates/building/_form.html.twig
+
+  {{ form_start(form) }}
+      {{ form_widget(form) }}
+      <button class="btn">{{ button_label|default('Save') }}</button>
+  {{ form_end(form) }}
+
+  check mo nalang yong mga nabago
+
+ - Click Edit button
+ - Open templates/building/_delete_form.html.twig
+  <button class="btn">Delete</button>
+  to
+  <button class="btn btn-danger btn-sm">Delete this BUilding</button>
+
+ - Click Show button
+ - Open templates/building/show.html.twig
+  Original Code
+  {% extends 'base.html.twig' %}
+
+  {% block title %}Building{% endblock %}
+
+  {% block body %}
+      <h1>Building</h1>
+      <a href="{{ path('building_index') }}">back to list</a>
+      <a href="{{ path('building_edit', {'id': building.id}) }}">edit</a>
+
+      <table class="table">
+          <tbody>
+              <tr>
+                  <th>Id</th>
+                  <td>{{ building.id }}</td>
+              </tr>
+              <tr>
+                  <th>BuildingCode</th>
+                  <td>{{ building.buildingCode }}</td>
+              </tr>
+              <tr>
+                  <th>BuildingName</th>
+                  <td>{{ building.buildingName }}</td>
+              </tr>
+              <tr>
+                  <th>Description</th>
+                  <td>{{ building.description }}</td>
+              </tr>
+          </tbody>
+      </table>
+
+      {{ include('building/_delete_form.html.twig') }}
+  {% endblock %}
+
+  check the changes

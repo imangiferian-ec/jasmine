@@ -1,4 +1,39 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<hr>
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    {{ form_start(form) }}
+    <div class="form-group">
+        {{ form_label(form.buildingCode, null, {
+          'label': 'Building Code',
+        }) }}
+        {{ form_widget(form.buildingCode, {'attr': {'class': 'form-control'}}) }}
+        <small>{{ form_help(form.buildingCode) }}</small>
+        <div class="form-error">
+            {{ form_errors(form.buildingCode) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.buildingName, null, {
+          'label': 'Building Name',
+        }) }}
+        {{ form_widget(form.buildingName, {'attr': {'class': 'form-control'}}) }}
+        <small>{{ form_help(form.buildingName) }}</small>
+        <div class="form-error">
+            {{ form_errors(form.buildingName) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.description, null, {
+          'label': 'Building Description',
+        }) }}
+        {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+        <small>{{ form_help(form.description) }}</small>
+        <div class="form-error">
+            {{ form_errors(form.description) }}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary float-right">{{ button_label|default('Save New Building') }}</button>
+    {{ form_end(form) }}
+  </div>
+</div>
+<hr>
