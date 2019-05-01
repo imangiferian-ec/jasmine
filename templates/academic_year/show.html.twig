@@ -1,6 +1,4 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Academic Year{% endblock %}
 {% block body %}
     <h1>Academic Year</h1>
     <a href="{{ path('academic_year_index') }}">back to list</a> |
@@ -23,7 +21,7 @@
         <td>{{ academic_year.status == 'a' ? 'Active' : 'Inactive' }}</td>
         </tr>
         <tr>
-        <th>IsAcceptingExaminee</th>
+        <th>Is Accepting Examinee?</th>
         <td>{{ academic_year.isAcceptingExaminee ? 'Yes' : 'No' }}</td>
         </tr>
         </tbody>
