@@ -22,6 +22,7 @@ class StudentProfilingDetailsController extends AbstractController
     {
         return $this->render('student_profiling_details/index.html.twig', [
             'student_profiling_details' => $studentProfilingDetailsRepository->findAll(),
+            'module' => 'student-profiling-details',
         ]);
     }
 

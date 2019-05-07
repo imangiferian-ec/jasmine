@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Subject index</h1>
 
-    <table class="table">
+    <table class="table" id="{{ module}}Table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -35,13 +35,18 @@
                     <a href="{{ path('subject_edit', {'id': subject.id}) }}">edit</a>
                 </td>
             </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">no records found</td>
-            </tr>
         {% endfor %}
         </tbody>
     </table>
 
     <a href="{{ path('subject_new') }}">Create new</a>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script>
+        var module = '{{module}}';
+    </script>
+    <script src="{{ asset('js/datatables.js') }}"></script>
 {% endblock %}

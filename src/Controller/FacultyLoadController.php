@@ -22,6 +22,7 @@ class FacultyLoadController extends AbstractController
     {
         return $this->render('faculty_load/index.html.twig', [
             'faculty_loads' => $facultyLoadRepository->findAll(),
+            'module' => 'faculty-load',
         ]);
     }
 

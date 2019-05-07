@@ -22,6 +22,7 @@ class CourseController extends AbstractController
     {
         return $this->render('course/index.html.twig', [
             'courses' => $courseRepository->findAll(),
+            'module' => 'course',
         ]);
     }
 

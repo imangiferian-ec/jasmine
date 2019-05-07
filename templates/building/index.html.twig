@@ -2,7 +2,7 @@
 {% block body %}
     <h1>List of Buildings</h1>
     <hr>
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="{{ module}}Table">
         <thead>
             <tr class="text-center">
                 <th>#</th>
@@ -26,13 +26,18 @@
                 </td>
             </tr>
             {% set cnt = cnt + 1 %}
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
         {% endfor %}
         </tbody>
     </table>
     <hr>
     <a class="btn btn-primary btn-md" href="{{ path('building_new') }}">Create New Building</a>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script>
+        var module = '{{module}}';
+    </script>
+    <script src="{{ asset('js/datatables.js') }}"></script>
 {% endblock %}

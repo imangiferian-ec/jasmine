@@ -22,6 +22,7 @@ class BuildingController extends AbstractController
     {
         return $this->render('building/index.html.twig', [
             'buildings' => $buildingRepository->findAll(),
+            'module' => 'building',
         ]);
     }
 

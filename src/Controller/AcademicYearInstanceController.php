@@ -22,6 +22,7 @@ class AcademicYearInstanceController extends AbstractController
     {
         return $this->render('academic_year_instance/index.html.twig', [
             'academic_year_instances' => $academicYearInstanceRepository->findAll(),
+            'module' => 'ay-instance',
         ]);
     }
 

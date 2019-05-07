@@ -22,6 +22,7 @@ class CurriculumSubjectEquivalenceController extends AbstractController
     {
         return $this->render('curriculum_subject_equivalence/index.html.twig', [
             'curriculum_subject_equivalences' => $curriculumSubjectEquivalenceRepository->findAll(),
+            'module' => 'curriculum-subject-equivalence',
         ]);
     }
 
