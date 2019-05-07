@@ -5,7 +5,7 @@
 {% block body %}
     <h1>ExamPassingScore index</h1>
 
-    <table class="table">
+    <table class="table" id="{{ module}}Table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -23,13 +23,18 @@
                     <a href="{{ path('exam_passing_score_edit', {'id': exam_passing_score.id}) }}">edit</a>
                 </td>
             </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
         {% endfor %}
         </tbody>
     </table>
 
     <a href="{{ path('exam_passing_score_new') }}">Create new</a>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script>
+        var module = '{{module}}';
+    </script>
+    <script src="{{ asset('js/datatables.js') }}"></script>
 {% endblock %}
