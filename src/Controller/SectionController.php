@@ -22,6 +22,7 @@ class SectionController extends AbstractController
     {
         return $this->render('section/index.html.twig', [
             'sections' => $sectionRepository->findAll(),
+            'module' => 'section',
         ]);
     }
 

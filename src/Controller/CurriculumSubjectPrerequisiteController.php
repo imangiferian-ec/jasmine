@@ -22,6 +22,7 @@ class CurriculumSubjectPrerequisiteController extends AbstractController
     {
         return $this->render('curriculum_subject_prerequisite/index.html.twig', [
             'curriculum_subject_prerequisites' => $curriculumSubjectPrerequisiteRepository->findAll(),
+            'module' => 'curriculum-subject-prerequisite',
         ]);
     }
 

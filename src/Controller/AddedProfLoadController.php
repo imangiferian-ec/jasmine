@@ -22,6 +22,7 @@ class AddedProfLoadController extends AbstractController
     {
         return $this->render('added_prof_load/index.html.twig', [
             'added_prof_loads' => $addedProfLoadRepository->findAll(),
+            'module' => 'added-prof-load',
         ]);
     }
 

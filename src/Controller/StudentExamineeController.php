@@ -22,6 +22,7 @@ class StudentExamineeController extends AbstractController
     {
         return $this->render('student_examinee/index.html.twig', [
             'student_examinees' => $studentExamineeRepository->findAll(),
+            'module' => 'student-examinee',
         ]);
     }
 

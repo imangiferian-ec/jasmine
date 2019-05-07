@@ -22,6 +22,7 @@ class ExamPassingScoreController extends AbstractController
     {
         return $this->render('exam_passing_score/index.html.twig', [
             'exam_passing_scores' => $examPassingScoreRepository->findAll(),
+            'module' => 'exam-passing-score',
         ]);
     }
 

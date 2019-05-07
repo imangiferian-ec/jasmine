@@ -22,6 +22,7 @@ class SubjectController extends AbstractController
     {
         return $this->render('subject/index.html.twig', [
             'subjects' => $subjectRepository->findAll(),
+            'module' => 'subject',
         ]);
     }
 
