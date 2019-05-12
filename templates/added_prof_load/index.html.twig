@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}StudentGrade index{% endblock %}
+{% block title %}AddedProfLoad index{% endblock %}
 
 {% block body %}
-    <h1>StudentGrade index</h1>
+    <h1>AddedProfLoad index</h1>
 
     <table class="table" id="{{ module}}Table">
         <thead>
@@ -13,19 +13,19 @@
             </tr>
         </thead>
         <tbody>
-        {% for student_grade in student_grades %}
+        {% for added_prof_load in added_prof_loads %}
             <tr>
-                <td>{{ student_grade.id }}</td>
+                <td>{{ added_prof_load.id }}</td>
                 <td>
-                    <a href="{{ path('student_grade_show', {'id': student_grade.id}) }}">show</a>
-                    <a href="{{ path('student_grade_edit', {'id': student_grade.id}) }}">edit</a>
+                    <a href="{{ path('added_prof_load_show', {'id': added_prof_load.id}) }}">show</a>
+                    <a href="{{ path('added_prof_load_edit', {'id': added_prof_load.id}) }}">edit</a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('student_grade_new') }}">Create new</a>
+    <a href="{{ path('added_prof_load_new') }}">Create new</a>
 {% endblock %}
 
 {% block javascripts %}

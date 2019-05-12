@@ -22,6 +22,7 @@ class StudentController extends AbstractController
     {
         return $this->render('student/index.html.twig', [
             'students' => $studentRepository->findAll(),
+            'module' => 'student',
         ]);
     }
 

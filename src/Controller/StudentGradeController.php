@@ -22,6 +22,7 @@ class StudentGradeController extends AbstractController
     {
         return $this->render('student_grade/index.html.twig', [
             'student_grades' => $studentGradeRepository->findAll(),
+            'module' => 'student-grade',
         ]);
     }
 

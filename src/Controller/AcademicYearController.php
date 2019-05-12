@@ -22,6 +22,7 @@ class AcademicYearController extends AbstractController
     {
         return $this->render('academic_year/index.html.twig', [
             'academic_years' => $academicYearRepository->findAll(),
+            'module' => 'academic-year',
         ]);
     }
 

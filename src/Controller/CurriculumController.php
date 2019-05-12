@@ -22,6 +22,7 @@ class CurriculumController extends AbstractController
     {
         return $this->render('curriculum/index.html.twig', [
             'curricula' => $curriculumRepository->findAll(),
+            'module' => 'curriculum',
         ]);
     }
 

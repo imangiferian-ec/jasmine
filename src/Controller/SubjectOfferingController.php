@@ -22,6 +22,7 @@ class SubjectOfferingController extends AbstractController
     {
         return $this->render('subject_offering/index.html.twig', [
             'subject_offerings' => $subjectOfferingRepository->findAll(),
+            'module' => 'subject-offering',
         ]);
     }
 

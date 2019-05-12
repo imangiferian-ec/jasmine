@@ -22,6 +22,7 @@ class SemesterController extends AbstractController
     {
         return $this->render('semester/index.html.twig', [
             'semesters' => $semesterRepository->findAll(),
+            'module' => 'semester',
         ]);
     }
 

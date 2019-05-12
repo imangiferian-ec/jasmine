@@ -22,6 +22,7 @@ class CollegeController extends AbstractController
     {
         return $this->render('college/index.html.twig', [
             'colleges' => $collegeRepository->findAll(),
+            'module' => 'college',
         ]);
     }
 
