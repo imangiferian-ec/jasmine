@@ -1,0 +1,39 @@
+<hr>
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    {{ form_start(form) }}
+    <div class="form-group">
+        {{ form_label(form.name, null, {
+          'label': 'Name (Start with ROLE_ e.g. ROLE_SALES)',
+        }) }}
+        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        <small>{{ form_help(form.name) }}</small>
+        <div class="form-error">
+            {{ form_errors(form.name) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.description, null, {
+          'label': 'Role Description',
+        }) }}
+        {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+        <small>{{ form_help(form.description) }}</small>
+        <div class="form-error">
+            {{ form_errors(form.description) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.isActiveRole, null, {
+          'label': 'Is Active?',
+        }) }}
+        {{ form_widget(form.isActiveRole) }}
+        <small>{{ form_help(form.isActiveRole) }}</small>
+        <div class="form-error">
+            {{ form_errors(form.isActiveRole) }}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary float-right">{{ button_label|default('Save New Role') }}</button>
+    {{ form_end(form) }}
+  </div>
+</div>
+<hr>

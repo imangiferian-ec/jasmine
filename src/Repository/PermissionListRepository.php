@@ -16,9 +16,8 @@ class PermissionListRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Permission::class);
+        parent::__construct($registry, PermissionList::class);
     }
-
     // /**
     //  * @return Permission[] Returns an array of Permission objects
     //  */

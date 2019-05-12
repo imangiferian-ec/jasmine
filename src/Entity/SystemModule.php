@@ -42,11 +42,11 @@ class SystemModule
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\PermissionList", mappedBy="module")
      */
-    private $no;
+    private $permissions;
 
     public function __construct()
     {
-        $this->no = new ArrayCollection();
+        $this->permissions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -105,31 +105,35 @@ class SystemModule
     /**
      * @return Collection|PermissionList[]
      */
-    public function getNo(): Collection
+    public function getPermissions(): Collection
     {
-        return $this->no;
+        return $this->permissions;
     }
 
-    public function addNo(PermissionList $no): self
+    public function addPermissions(PermissionList $permissions): self
     {
-        if (!$this->no->contains($no)) {
-            $this->no[] = $no;
+        if (!$this->permissions->contains($permissions)) {
+            $this->permissions[] = $permissions;
             $no->setModule($this);
         }
 
         return $this;
     }
 
-    public function removeNo(PermissionList $no): self
+    public function removePermissions(PermissionList $permissions): self
     {
-        if ($this->no->contains($no)) {
-            $this->no->removeElement($no);
+        if ($this->permissions->contains($permissions)) {
+            $this->permissions->removeElement($permissions);
             // set the owning side to null (unless already changed)
-            if ($no->getModule() === $this) {
-                $no->setModule(null);
+            if ($permissions->getModule() === $this) {
+                $permissions->setModule(null);
             }
         }
 
         return $this;
+    }
+
+    public function __toString(){
+      return $this->moduleName;
     }
 }

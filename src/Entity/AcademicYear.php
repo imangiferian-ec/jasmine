@@ -28,9 +28,9 @@ class AcademicYear
     private $ayEndYear;
 
     /**
-     * @ORM\Column(type="string", length=1)
+     * @ORM\Column(type="boolean", options={"default":1})
      */
-    private $status;
+    private $isActiveAY;
 
     /**
      * @ORM\Column(type="boolean")
@@ -66,14 +66,14 @@ class AcademicYear
         return $this;
     }
 
-    public function getStatus(): ?string
+    public function getIsActiveAY(): ?string
     {
-        return $this->status;
+        return $this->isActiveAY;
     }
 
-    public function setStatus(string $status): self
+    public function setIsActiveAY(string $isActiveAY): self
     {
-        $this->status = $status;
+        $this->isActiveAY = isActiveAY;
 
         return $this;
     }

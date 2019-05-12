@@ -59,11 +59,6 @@ class Subject
      */
     private $course;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isForHighschool;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -161,18 +156,6 @@ class Subject
     public function setCourse(?Course $course): self
     {
         $this->course = $course;
-
-        return $this;
-    }
-
-    public function getIsForHighschool(): ?bool
-    {
-        return $this->isForHighschool;
-    }
-
-    public function setIsForHighschool(bool $isForHighschool): self
-    {
-        $this->isForHighschool = $isForHighschool;
 
         return $this;
     }

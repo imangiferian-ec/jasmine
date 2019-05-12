@@ -50,9 +50,9 @@ class AcademicYearInstance
     private $remarks;
 
     /**
-     * @ORM\Column(type="string", length=1)
+     * @ORM\Column(type="boolean", options={"default":1})
      */
-    private $status;
+    private $isActiveAYI;
 
     public function getId(): ?int
     {
@@ -131,14 +131,14 @@ class AcademicYearInstance
         return $this;
     }
 
-    public function getStatus(): ?string
+    public function getIsActiveAYI(): ?string
     {
-        return $this->status;
+        return $this->isActiveAYI;
     }
 
-    public function setStatus(string $status): self
+    public function setIsActiveAYI(string $isActiveAYI): self
     {
-        $this->status = $status;
+        $this->isActiveAYI = $isActiveAYI;
 
         return $this;
     }

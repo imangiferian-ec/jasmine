@@ -43,12 +43,12 @@ class PermissionList
     private $position;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default" : 1})
      */
     private $isActive;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default" : 0})
      */
     private $isSideMenu;
 
@@ -57,11 +57,6 @@ class PermissionList
      * @ORM\JoinColumn(nullable=false)
      */
     private $module;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $routeUrl;
 
     public function getId(): ?int
     {
@@ -164,15 +159,7 @@ class PermissionList
         return $this;
     }
 
-    public function getRouteUrl(): ?string
-    {
-        return $this->routeUrl;
-    }
-
-    public function setRouteUrl(string $routeUrl): self
-    {
-        $this->routeUrl = $routeUrl;
-
-        return $this;
+    public function __toString() {
+        return $this->functionName;
     }
 }

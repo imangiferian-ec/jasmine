@@ -30,7 +30,7 @@ class FacultyLoad
     private $subjectOfferring;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default":0})
      */
     private $isGradeSubmitted;
 
@@ -50,7 +50,7 @@ class FacultyLoad
     private $gradeUpdatedAt;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default" : 0})
      */
     private $isGradeFinalized;
 
@@ -63,6 +63,16 @@ class FacultyLoad
      * @ORM\Column(type="datetime")
      */
     private $gradeFinalizedAt;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default" : 0})
+     */
+    private $isAddedSubject;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $dateSubjectAdded;
 
     public function getId(): ?int
     {
@@ -153,6 +163,18 @@ class FacultyLoad
         return $this;
     }
 
+    public function getIsAddedSubject(): ?bool
+    {
+        return $this->isGradeFinalized;
+    }
+
+    public function setIsAddedSubject(bool $isAddedSubject): self
+    {
+        $this->isAddedSubject = $isAddedSubject;
+
+        return $this;
+    }
+
     public function getDateGradeFinalized(): ?\DateTimeInterface
     {
         return $this->dateGradeFinalized;
@@ -173,6 +195,18 @@ class FacultyLoad
     public function setGradeFinalizedAt(\DateTimeInterface $gradeFinalizedAt): self
     {
         $this->gradeFinalizedAt = $gradeFinalizedAt;
+
+        return $this;
+    }
+
+    public function getDateSubjectAdded(): ?\DateTimeInterface
+    {
+        return $this->dateSubjectAdded;
+    }
+
+    public function setDateSubjectAdded(\DateTimeInterface $dateSubjectAdded): self
+    {
+        $this->dateSubjectAdded = $dateSubjectAdded;
 
         return $this;
     }

@@ -49,6 +49,11 @@ class Curriculum
      */
     private $course;
 
+    /**
+     * @ORM\Column(type="boolean", options={"default" : 0})
+     */
+    private $isActiveCurriculum;
+
     public function getId(): ?int
     {
         return $this->id;

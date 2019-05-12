@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Security\Voter\PermissionVoter;
 
 /**
  * @Route("/building")
@@ -20,9 +21,14 @@ class BuildingController extends AbstractController
      */
     public function index(BuildingRepository $buildingRepository): Response
     {
-        return $this->render('building/index.html.twig', [
-            'buildings' => $buildingRepository->findAll(),
-        ]);
+        // $building = new Building;
+        // if(!$this->isGranted('building_index', $building)){
+        //   throw $this->createAccessDeniedException("You do not have access permission");
+        // }
+
+        $data['buildings'] = $buildingRepository->findAll();
+
+        return $this->render('building/index.html.twig', $data);
     }
 
     /**
@@ -30,6 +36,7 @@ class BuildingController extends AbstractController
      */
     public function new(Request $request): Response
     {
+
         $building = new Building();
         $form = $this->createForm(BuildingType::class, $building);
         $form->handleRequest($request);

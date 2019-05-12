@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Table(name="roles")
  * @ORM\Entity(repositoryClass="App\Repository\RoleRepository")
  */
 class Role
@@ -33,9 +34,9 @@ class Role
     private $landingPage;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default" : 1})
      */
-    private $isActive;
+    private $isActiveRole;
 
     public function getId(): ?int
     {
@@ -78,15 +79,19 @@ class Role
         return $this;
     }
 
-    public function getIsActive(): ?bool
+    public function getIsActiveRole(): ?bool
     {
-        return $this->isActive;
+        return $this->isActiveRole;
     }
 
-    public function setIsActive(bool $isActive): self
+    public function setIsActiveRole(bool $isActiveRole): self
     {
-        $this->isActive = $isActive;
+        $this->isActiveRole = $isActiveRole;
 
         return $this;
+    }
+
+    public function __toString() {
+        return $this->name;
     }
 }

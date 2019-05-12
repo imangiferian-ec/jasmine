@@ -28,7 +28,7 @@ class UserFixtures extends Fixture
         $userAdmin->setFirstName('Admin');
         $userAdmin->setIsActive(1);
         $userAdmin->setBirthdate(\DateTime::createFromFormat('Y-m-d', "1983-12-09"));
-        $userAdmin->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
+        $userAdmin->setRoles(['ROLE_ADMIN']);
         $manager->persist($userAdmin);
 
         $userUser = new User();

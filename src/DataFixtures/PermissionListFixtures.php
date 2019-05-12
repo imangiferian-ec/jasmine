@@ -9,9 +9,103 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class PermissionListFixtures extends Fixture implements DependentFixtureInterface
 {
+    public const U_INDEX = 'user index';
+    public const U_NEW = 'create new user';
+    public const U_SHOW = 'show user details';
+    public const U_EDIT = 'modify user details';
+    public const U_DELETE = 'delete user';
+    public const U_MYDETAILS = 'my acount details';
+
+    public const US_BUILDING_LIST = 'building list';
+
     public function load(ObjectManager $manager)
     {
-        $ayList = new PermissionList();
+      $buildingList = new PermissionList();
+      $buildingList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_US))
+        ->setFunctionName('Building List')
+        ->setRoute('building_index')
+        ->setLabel('list of buildings')
+        ->setPermittedRoles(['ROLE_ADMIN'])
+        ->setPosition(1)
+        ->setIsActive(1)
+        ->setIsSideMenu(1);
+      $manager->persist($buildingList);
+
+      $userList = new PermissionList();
+      $userList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_UM))
+        ->setFunctionName('User List')
+        ->setRoute('user_index')
+        ->setLabel('list of users')
+        ->setPermittedRoles(['ROLE_ADMIN'])
+        ->setPosition(1)
+        ->setIsActive(1)
+        ->setIsSideMenu(1);
+      $manager->persist($userList);
+
+      $userNew = new PermissionList();
+      $userNew->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_UM))
+        ->setFunctionName('Create New User')
+        ->setRoute('user_new')
+        ->setLabel('create new user')
+        ->setPermittedRoles(['ROLE_ADMIN'])
+        ->setPosition(2)
+        ->setIsActive(1)
+        ->setIsSideMenu(0);
+      $manager->persist($userNew);
+
+      $userShow = new PermissionList();
+      $userShow->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_UM))
+        ->setFunctionName('User Details')
+        ->setRoute('user_show')
+        ->setLabel('details')
+        ->setPermittedRoles(['ROLE_ADMIN'])
+        ->setPosition(3)
+        ->setIsActive(1)
+        ->setIsSideMenu(0);
+      $manager->persist($userShow);
+
+      $userEdit = new PermissionList();
+      $userEdit->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_UM))
+        ->setFunctionName('Modify User Information')
+        ->setRoute('user_edit')
+        ->setLabel('edit')
+        ->setPermittedRoles(['ROLE_ADMIN'])
+        ->setPosition(4)
+        ->setIsActive(1)
+        ->setIsSideMenu(0);
+      $manager->persist($userEdit);
+
+      $userDelete = new PermissionList();
+      $userDelete->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_UM))
+        ->setFunctionName('Delete User')
+        ->setRoute('user_delete')
+        ->setLabel('delete')
+        ->setPermittedRoles(['ROLE_ADMIN'])
+        ->setPosition(5)
+        ->setIsActive(1)
+        ->setIsSideMenu(0);
+      $manager->persist($userDelete);
+
+      $userMyDetails = new PermissionList();
+      $userMyDetails->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_UM))
+        ->setFunctionName('My Account Details')
+        ->setRoute('user_my_details')
+        ->setLabel('my account')
+        ->setPermittedRoles(['ROLE_ADMIN', 'ROLE_USER'])
+        ->setPosition(6)
+        ->setIsActive(1)
+        ->setIsSideMenu(0);
+      $manager->persist($userMyDetails);
+
+      $this->addReference(self::US_BUILDING_LIST, $buildingList);
+      $this->addReference(self::U_INDEX, $userList);
+      $this->addReference(self::U_NEW, $userNew);
+      $this->addReference(self::U_SHOW, $userShow);
+      $this->addReference(self::U_EDIT, $userEdit);
+      $this->addReference(self::U_DELETE, $userDelete);
+      $this->addReference(self::U_MYDETAILS, $userMyDetails);
+      $manager->flush();
+        /*$ayList = new PermissionList();
         $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
           ->setFunctionName('AY List')
           ->setRoute('academic_year_index')
@@ -59,7 +153,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($ayEdit);
 
-        //                      DELETE     ANY      ANY
         $ayDelete = new PermissionList();
         $ayDelete->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
           ->setFunctionName('Delete Academic Year')
@@ -216,7 +309,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($newBuilding);
 
-        //                             GET        ANY      ANY    /building/{id}
         $showBuilding = new PermissionList();
         $showBuilding->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_US))
           ->setFunctionName('Building Detail')
@@ -229,7 +321,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($showBuilding);
 
-        //                             GET|POST   ANY      ANY    /building/{id}/edit
         $editBuilding = new PermissionList();
         $editBuilding->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_US))
           ->setFunctionName('Modify Building List')
@@ -338,7 +429,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($addCourse);
 
-        // course_show                              GET        ANY      ANY    /course/{id}
         $courseShow = new PermissionList();
         $courseShow->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_US))
           ->setFunctionName('Course Details')
@@ -351,7 +441,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($courseShow);
 
-        //                               GET|POST   ANY      ANY    /course/{id}/edit
         $courseEdit = new PermissionList();
         $courseEdit->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_US))
           ->setFunctionName('Modify Course')
@@ -364,7 +453,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($courseEdit);
 
-        // course_delete                            DELETE     ANY      ANY    /course/{id}
         $courseDelete = new PermissionList();
         $courseDelete->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_US))
           ->setFunctionName('Delete Course')
@@ -377,7 +465,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($courseDelete);
 
-        // curriculum_index                         GET        ANY      ANY    /curriculum/
         $curriculum = new PermissionList();
         $curriculum->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_CM))
           ->setFunctionName('List of Curriculum')
@@ -390,7 +477,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(1);
         $manager->persist($curriculum);
 
-        // curriculum_new                           GET|POST   ANY      ANY    /curriculum/new
         $curriculumNew = new PermissionList();
         $curriculumNew->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_CM))
           ->setFunctionName('Create New Curriculum')
@@ -403,7 +489,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($curriculumNew);
 
-        // curriculum_show                          GET        ANY      ANY    /curriculum/{id}
         $showCurriculum = new PermissionList();
         $showCurriculum->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_CM))
           ->setFunctionName('Curricum Details')
@@ -416,7 +501,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($showCurriculum);
 
-        // curriculum_edit                          GET|POST   ANY      ANY    /curriculum/{id}/edit
         $curriculumEdit = new PermissionList();
         $curriculumEdit->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_CM))
           ->setFunctionName('Modify Curriculum')
@@ -428,7 +512,7 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsActive(1)
           ->setIsSideMenu(0);
         $manager->persist($curriculumEdit);
-        // curriculum_delete                        DELETE     ANY      ANY    /curriculum/{id}
+
         $curriculumDelete = new PermissionList();
         $curriculumDelete->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_CM))
           ->setFunctionName('Delete Curriculum')
@@ -441,7 +525,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($curriculumDelete);
 
-        // curriculum_subject_index                 GET        ANY      ANY    /curriculum-subject/
         $csIndex = new PermissionList();
         $csIndex->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_CM))
           ->setFunctionName('Curriculum Subject List')
@@ -454,7 +537,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(1);
         $manager->persist($csIndex);
 
-        // curriculum_subject_new                   GET|POST   ANY      ANY    /curriculum-subject/new
         $cmNew = new PermissionList();
         $cmNew->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_CM))
           ->setFunctionName('Add New Curriculum Subject')
@@ -467,7 +549,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($cmNew);
 
-        // curriculum_subject_show                  GET        ANY      ANY    /curriculum-subject/{id}
         $cmSubjectShow = new PermissionList();
         $cmSubjectShow->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_CM))
           ->setFunctionName('Curriculum Subject Details')
@@ -480,7 +561,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($cmSubjectShow);
 
-        // curriculum_subject_edit                  GET|POST   ANY      ANY    /curriculum-subject/{id}/edit
         $csEdit = new PermissionList();
         $csEdit->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_CM))
           ->setFunctionName('MOdify Curriculum Subjects')
@@ -493,7 +573,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(1);
         $manager->persist($csEdit);
 
-        // curriculum_subject_delete                DELETE     ANY      ANY    /curriculum-subject/{id}
         $deleteCS = new PermissionList();
         $deleteCS->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_CM))
           ->setFunctionName('Delete Curriculum Subject')
@@ -506,7 +585,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($deleteCS);
 
-        // curriculum_subject_equivalence_index     GET        ANY      ANY    /curriculum-subject-equivalence/
         $ayList = new PermissionList();
         $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_CM))
           ->setFunctionName('Curriculum Subject - Subject Equivalence List')
@@ -519,7 +597,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($ayList);
 
-        // curriculum_subject_equivalence_new       GET|POST   ANY      ANY    /curriculum-subject-equivalence/new
         $addCSE = new PermissionList();
         $addCSE->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_CM))
           ->setFunctionName('Add New subject Equivalence')
@@ -532,7 +609,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($addCSE);
 
-        // curriculum_subject_equivalence_show      GET        ANY      ANY    /curriculum-subject-equivalence/{id}
         $cseShow = new PermissionList();
         $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_CM))
           ->setFunctionName('Details of Subject Equivalence')
@@ -545,7 +621,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($cseShow);
 
-        // curriculum_subject_equivalence_edit      GET|POST   ANY      ANY    /curriculum-subject-equivalence/{id}/edit
         $cseEdit = new PermissionList();
         $cseEdit->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_CM))
           ->setFunctionName('Modify Subject Equivalence')
@@ -558,7 +633,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($cseEdit);
 
-        // curriculum_subject_equivalence_delete    DELETE     ANY      ANY    /curriculum-subject-equivalence/{id}
         $cseDelete = new PermissionList();
         $cseDelete->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_CM))
           ->setFunctionName('Delete Subject Equivalence')
@@ -571,7 +645,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($cseDelete);
 
-        // curriculum_subject_prerequisite_index    GET        ANY      ANY    /curriculum-subject-prerequisite/
         $csPrerequisites = new PermissionList();
         $csPrerequisites->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_CM))
           ->setFunctionName('Curriculum Subject Prerequisites')
@@ -584,7 +657,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($csPrerequisites);
 
-        // curriculum_subject_prerequisite_new      GET|POST   ANY      ANY    /curriculum-subject-prerequisite/new
         $csPrere = new PermissionList();
         $csPrere->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_CM))
           ->setFunctionName('Add Curriculum Subject Prerequisites')
@@ -597,7 +669,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($csPrere);
 
-        // curriculum_subject_prerequisite_show     GET        ANY      ANY    /curriculum-subject-prerequisite/{id}
         $cspShow = new PermissionList();
         $cspShow->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_CM))
           ->setFunctionName('Curriculum Subject Prerequisite Details')
@@ -610,7 +681,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($cspShow);
 
-        // curriculum_subject_prerequisite_edit     GET|POST   ANY      ANY    /curriculum-subject-prerequisite/{id}/edit
         $cspEdit = new PermissionList();
         $cspEdit->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_CM))
           ->setFunctionName('Modify Curriculum Subject Prerequisite')
@@ -623,7 +693,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($cspEdit);
 
-        // curriculum_subject_prerequisite_delete   DELETE     ANY      ANY    /curriculum-subject-prerequisite/{id}
         $cspDelete = new PermissionList();
         $cspDelete->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_CM))
           ->setFunctionName('Delete Curriculum Subject Prerequisite')
@@ -636,7 +705,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($cspDelete);
 
-        // department_index                         GET        ANY      ANY    /department/
         $deptList = new PermissionList();
         $deptList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_US))
           ->setFunctionName('Department List')
@@ -649,7 +717,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(1);
         $manager->persist($deptList);
 
-        // department_new                           GET|POST   ANY      ANY    /department/new
         $newDepartment = new PermissionList();
         $newDepartment->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_US))
           ->setFunctionName('Create New Department')
@@ -662,7 +729,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(1);
         $manager->persist($newDepartment);
 
-        // department_show                          GET        ANY      ANY    /department/{id}
         $showDept = new PermissionList();
         $showDept->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_US))
           ->setFunctionName('Department Details')
@@ -675,7 +741,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($showDept);
 
-        // department_edit                          GET|POST   ANY      ANY    /department/{id}/edit
         $ayList = new PermissionList();
         $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_US))
           ->setFunctionName('Modify Department')
@@ -688,7 +753,6 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsSideMenu(0);
         $manager->persist($ayList);
 
-        //                         DELETE     ANY      ANY
         $deleteDept = new PermissionList();
         $deleteDept->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_US))
           ->setFunctionName('Delete Department')
@@ -700,7 +764,1468 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
           ->setIsActive(1)
           ->setIsSideMenu(0);
         $manager->persist($deleteDept);
-        //
+
+
+        // employee_index                           GET        ANY      ANY    /employee/
+        $employeeList = new PermissionList();
+        $employeeList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_PROFILING))
+          ->setFunctionName('List of Employee')
+          ->setRoute('employee_index')
+          ->setLabel('List of Employee')
+          ->setPermittedRoles(["ROLE_ADMIN"])
+          ->setRouteUrl("/employee/")
+          ->setPosition(1)
+          ->setIsActive(1)
+          ->setIsSideMenu(1);
+        $manager->persist($employeeList);
+
+        // employee_new                             GET|POST   ANY      ANY    /employee/new
+        $emploeyeeNew = new PermissionList();
+        $emploeyeeNew->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_PROFILING))
+          ->setFunctionName('Add New Employee')
+          ->setRoute('employee_new')
+          ->setLabel('create new employee')
+          ->setPermittedRoles(["ROLE_ADMIN"])
+          ->setRouteUrl("/employee/new")
+          ->setPosition(2)
+          ->setIsActive(1)
+          ->setIsSideMenu(0);
+        $manager->persist($emploeyeeNew);
+
+        // employee_show                            GET        ANY      ANY    /employee/{id}
+        $showEmployee = new PermissionList();
+        $showEmployee->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_PROFILING))
+          ->setFunctionName('Employee Details')
+          ->setRoute('employee_show')
+          ->setLabel('details')
+          ->setPermittedRoles(["ROLE_ADMIN"])
+          ->setRouteUrl("/employee/{id}")
+          ->setPosition(3)
+          ->setIsActive(1)
+          ->setIsSideMenu(0);
+        $manager->persist($showEmployee);
+
+        // employee_edit                            GET|POST   ANY      ANY    /employee/{id}/edit
+        $employeeEdit = new PermissionList();
+        $employeeEdit->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_PROFILING))
+          ->setFunctionName('Modify Employee Details')
+          ->setRoute('employee_edit')
+          ->setLabel('edit')
+          ->setPermittedRoles(["ROLE_ADMIN"])
+          ->setRouteUrl("/employee/{id}/edit")
+          ->setPosition(4)
+          ->setIsActive(1)
+          ->setIsSideMenu(0);
+        $manager->persist($employeeEdit);
+
+        // employee_delete                          DELETE     ANY      ANY    /employee/{id}
+        $delEmp = new PermissionList();
+        $delEmp->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_PROFILING))
+          ->setFunctionName('Delete Employee')
+          ->setRoute('employee_delete')
+          ->setLabel('delete')
+          ->setPermittedRoles(["ROLE_ADMIN"])
+          ->setRouteUrl("/employee/{id}")
+          ->setPosition(5)
+          ->setIsActive(1)
+          ->setIsSideMenu(0);
+        $manager->persist($delEmp);
+
+        // enrollment_details_index                 GET        ANY      ANY    /enrollment-details/
+        $emrollmentDetails = new PermissionList();
+        $emrollmentDetails->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_ENROLLMENT))
+          ->setFunctionName('Enrollment List')
+          ->setRoute('enrollment_details_index')
+          ->setLabel('List of Enrollment')
+          ->setPermittedRoles(["ROLE_ADMIN"])
+          ->setRouteUrl("/enrollment-details/")
+          ->setPosition(1)
+          ->setIsActive(1)
+          ->setIsSideMenu(0);
+        $manager->persist($emrollmentDetails);
+
+        // enrollment_details_new                   GET|POST   ANY      ANY    /enrollment-details/new
+        $enrollmentNew = new PermissionList();
+        $enrollmentNew->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_ENROLLMENT))
+          ->setFunctionName('Create New Enrollment')
+          ->setRoute('enrollment_details_new')
+          ->setLabel('new enrollment')
+          ->setPermittedRoles(["ROLE_ADMIN"])
+          ->setRouteUrl("/enrollment-details/new")
+          ->setPosition(2)
+          ->setIsActive(1)
+          ->setIsSideMenu(0);
+        $manager->persist($enrollmentNew);
+
+        // enrollment_details_show                  GET        ANY      ANY    /enrollment-details/{id}
+        $eds = new PermissionList();
+        $eds->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_ENROLLMENT))
+          ->setFunctionName('Show Details of Enrollment')
+          ->setRoute('enrollment_details_show')
+          ->setLabel('details')
+          ->setPermittedRoles(["ROLE_ADMIN"])
+          ->setRouteUrl("/enrollment-details/{id}")
+          ->setPosition(3)
+          ->setIsActive(1)
+          ->setIsSideMenu(0);
+        $manager->persist($eds);
+
+        // enrollment_details_edit                  GET|POST   ANY      ANY    /enrollment-details/{id}/edit
+        $enrollmentDe = new PermissionList();
+        $enrollmentDe->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_ENROLLMENT))
+          ->setFunctionName('Edit Details of Enrollment')
+          ->setRoute('enrollment_details_edit')
+          ->setLabel('edit')
+          ->setPermittedRoles(["ROLE_ADMIN"])
+          ->setRouteUrl("/enrollment-details/{id}/edit")
+          ->setPosition(4)
+          ->setIsActive(1)
+          ->setIsSideMenu(0);
+        $manager->persist($enrollmentDe);
+
+        // enrollment_details_delete                DELETE     ANY      ANY    /enrollment-details/{id}
+        $enrollmentDetailsDelete = new PermissionList();
+        $enrollmentDetailsDelete->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_ENROLLMENT))
+          ->setFunctionName('AY List')
+          ->setRoute('enrollment_details_delete')
+          ->setLabel('academic year list')
+          ->setPermittedRoles(["ROLE_ADMIN"])
+          ->setRouteUrl("/enrollment-details/{id}/")
+          ->setPosition(5)
+          ->setIsActive(1)
+          ->setIsSideMenu(0);
+        $manager->persist($enrollmentDetailsDelete);
+        */
+
+        //NOT YET DONE
+        // // exam_passing_score_index                 GET        ANY      ANY    /exam-passing-score/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // exam_passing_score_new                   GET|POST   ANY      ANY    /exam-passing-score/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // exam_passing_score_show                  GET        ANY      ANY    /exam-passing-score/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // exam_passing_score_edit                  GET|POST   ANY      ANY    /exam-passing-score/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // exam_passing_score_delete                DELETE     ANY      ANY    /exam-passing-score/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // faculty_load_index                       GET        ANY      ANY    /faculty-load/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_FACULTY_LOADING))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // faculty_load_new                         GET|POST   ANY      ANY    /faculty-load/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_FACULTY_LOADING))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // faculty_load_show                        GET        ANY      ANY    /faculty-load/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_FACULTY_LOADING))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // faculty_load_edit                        GET|POST   ANY      ANY    /faculty-load/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_FACULTY_LOADING))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // faculty_load_delete                      DELETE     ANY      ANY    /faculty-load/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_FACULTY_LOADING))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // room_index                               GET        ANY      ANY    /room/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // room_new                                 GET|POST   ANY      ANY    /room/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // room_show                                GET        ANY      ANY    /room/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // room_edit                                GET|POST   ANY      ANY    /room/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // room_delete                              DELETE     ANY      ANY    /room/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // section_index                            GET        ANY      ANY    /section/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // section_new                              GET|POST   ANY      ANY    /section/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // section_show                             GET        ANY      ANY    /section/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // section_edit                             GET|POST   ANY      ANY    /section/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // section_delete                           DELETE     ANY      ANY    /section/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // app_login                                ANY        ANY      ANY    /login
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // semester_index                           GET        ANY      ANY    /semester/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // semester_new                             GET|POST   ANY      ANY    /semester/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // semester_show                            GET        ANY      ANY    /semester/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // semester_edit                            GET|POST   ANY      ANY    /semester/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // semester_delete                          DELETE     ANY      ANY    /semester/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_index                            GET        ANY      ANY    /student/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_new                              GET|POST   ANY      ANY    /student/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_show                             GET        ANY      ANY    /student/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_edit                             GET|POST   ANY      ANY    /student/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_delete                           DELETE     ANY      ANY    /student/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_enrolled_subject_index           GET        ANY      ANY    /student-enrolled-subjects/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_enrolled_subject_new             GET|POST   ANY      ANY    /student-enrolled-subjects/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_enrolled_subject_show            GET        ANY      ANY    /student-enrolled-subjects/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_enrolled_subject_edit            GET|POST   ANY      ANY    /student-enrolled-subjects/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_enrolled_subject_delete          DELETE     ANY      ANY    /student-enrolled-subjects/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_examinee_index                   GET        ANY      ANY    /student-examinee/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_examinee_new                     GET|POST   ANY      ANY    /student-examinee/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_examinee_show                    GET        ANY      ANY    /student-examinee/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_examinee_edit                    GET|POST   ANY      ANY    /student-examinee/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_examinee_delete                  DELETE     ANY      ANY    /student-examinee/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_grade_index                      GET        ANY      ANY    /student-grade/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_grade_new                        GET|POST   ANY      ANY    /student-grade/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_grade_show                       GET        ANY      ANY    /student-grade/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_grade_edit                       GET|POST   ANY      ANY    /student-grade/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_grade_delete                     DELETE     ANY      ANY    /st
+        // // employee_index                           GET        ANY      ANY    /employee/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // employee_new                             GET|POST   ANY      ANY    /employee/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // employee_show                            GET        ANY      ANY    /employee/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // employee_edit                            GET|POST   ANY      ANY    /employee/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // employee_delete                          DELETE     ANY      ANY    /employee/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // enrollment_details_index                 GET        ANY      ANY    /enrollment-details/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // enrollment_details_new                   GET|POST   ANY      ANY    /enrollment-details/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // enrollment_details_show                  GET        ANY      ANY    /enrollment-details/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // enrollment_details_edit                  GET|POST   ANY      ANY    /enrollment-details/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // enrollment_details_delete                DELETE     ANY      ANY    /enrollment-details/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // exam_passing_score_index                 GET        ANY      ANY    /exam-passing-score/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // exam_passing_score_new                   GET|POST   ANY      ANY    /exam-passing-score/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // exam_passing_score_show                  GET        ANY      ANY    /exam-passing-score/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // exam_passing_score_edit                  GET|POST   ANY      ANY    /exam-passing-score/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // exam_passing_score_delete                DELETE     ANY      ANY    /exam-passing-score/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // faculty_load_index                       GET        ANY      ANY    /faculty-load/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_FACULTY_LOADING))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // faculty_load_new                         GET|POST   ANY      ANY    /faculty-load/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_FACULTY_LOADING))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // faculty_load_show                        GET        ANY      ANY    /faculty-load/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_FACULTY_LOADING))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // faculty_load_edit                        GET|POST   ANY      ANY    /faculty-load/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_FACULTY_LOADING))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // faculty_load_delete                      DELETE     ANY      ANY    /faculty-load/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_FACULTY_LOADING))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // room_index                               GET        ANY      ANY    /room/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // room_new                                 GET|POST   ANY      ANY    /room/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // room_show                                GET        ANY      ANY    /room/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // room_edit                                GET|POST   ANY      ANY    /room/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // room_delete                              DELETE     ANY      ANY    /room/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // section_index                            GET        ANY      ANY    /section/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // section_new                              GET|POST   ANY      ANY    /section/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // section_show                             GET        ANY      ANY    /section/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // section_edit                             GET|POST   ANY      ANY    /section/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // section_delete                           DELETE     ANY      ANY    /section/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // app_login                                ANY        ANY      ANY    /login
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // semester_index                           GET        ANY      ANY    /semester/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // semester_new                             GET|POST   ANY      ANY    /semester/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // semester_show                            GET        ANY      ANY    /semester/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // semester_edit                            GET|POST   ANY      ANY    /semester/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // semester_delete                          DELETE     ANY      ANY    /semester/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_index                            GET        ANY      ANY    /student/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_new                              GET|POST   ANY      ANY    /student/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_show                             GET        ANY      ANY    /student/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_edit                             GET|POST   ANY      ANY    /student/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_delete                           DELETE     ANY      ANY    /student/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_enrolled_subject_index           GET        ANY      ANY    /student-enrolled-subjects/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_enrolled_subject_new             GET|POST   ANY      ANY    /student-enrolled-subjects/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_enrolled_subject_show            GET        ANY      ANY    /student-enrolled-subjects/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_enrolled_subject_edit            GET|POST   ANY      ANY    /student-enrolled-subjects/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_enrolled_subject_delete          DELETE     ANY      ANY    /student-enrolled-subjects/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_examinee_index                   GET        ANY      ANY    /student-examinee/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_examinee_new                     GET|POST   ANY      ANY    /student-examinee/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_examinee_show                    GET        ANY      ANY    /student-examinee/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_examinee_edit                    GET|POST   ANY      ANY    /student-examinee/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_examinee_delete                  DELETE     ANY      ANY    /student-examinee/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_grade_index                      GET        ANY      ANY    /student-grade/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_grade_new                        GET|POST   ANY      ANY    /student-grade/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_grade_show                       GET        ANY      ANY    /student-grade/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_grade_edit                       GET|POST   ANY      ANY    /student-grade/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_grade_delete                     DELETE     ANY      ANY    /student-grade/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_profiling_details_index          GET        ANY      ANY    /student-profiling-details/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_profiling_details_new            GET|POST   ANY      ANY    /student-profiling-details/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_profiling_details_show           GET        ANY      ANY    /student-profiling-details/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_profiling_details_edit           GET|POST   ANY      ANY    /student-profiling-details/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_profiling_details_delete         DELETE     ANY      ANY    /student-profiling-details/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // subject_index                            GET        ANY      ANY    /subject/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // subject_new                              GET|POST   ANY      ANY    /subject/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // subject_show                             GET        ANY      ANY    /subject/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // subject_edit                             GET|POST   ANY      ANY    /subject/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // subject_delete                           DELETE     ANY      ANY    /subject/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
         // // employee_index                           GET        ANY      ANY    /employee/
         // $ayList = new PermissionList();
         // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
@@ -1554,7 +3079,265 @@ class PermissionListFixtures extends Fixture implements DependentFixtureInterfac
         //   ->setIsSideMenu(1);
         // $manager->persist($ayList);
 
-        $manager->flush();
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // subject_offering_index                   GET        ANY      ANY    /subject-offering/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // subject_offering_new                     GET|POST   ANY      ANY    /subject-offering/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // subject_offering_show                    GET        ANY      ANY    /subject-offering/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // subject_offering_edit                    GET|POST   ANY      ANY    /subject-offering/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // subject_offering_delete                  DELETE     ANY      ANY    /subject-offering/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_profiling_details_index          GET        ANY      ANY    /student-profiling-details/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_profiling_details_new            GET|POST   ANY      ANY    /student-profiling-details/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_profiling_details_show           GET        ANY      ANY    /student-profiling-details/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_profiling_details_edit           GET|POST   ANY      ANY    /student-profiling-details/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // student_profiling_details_delete         DELETE     ANY      ANY    /student-profiling-details/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // subject_index                            GET        ANY      ANY    /subject/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // subject_new                              GET|POST   ANY      ANY    /subject/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // subject_show                             GET        ANY      ANY    /subject/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // subject_edit                             GET|POST   ANY      ANY    /subject/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // subject_delete                           DELETE     ANY      ANY    /subject/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // subject_offering_index                   GET        ANY      ANY    /subject-offering/
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // subject_offering_new                     GET|POST   ANY      ANY    /subject-offering/new
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // subject_offering_show                    GET        ANY      ANY    /subject-offering/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // subject_offering_edit                    GET|POST   ANY      ANY    /subject-offering/{id}/edit
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+        // // subject_offering_delete                  DELETE     ANY      ANY    /subject-offering/{id}
+        // $ayList = new PermissionList();
+        // $ayList->setModule($this->getReference(SystemModuleFixtures::SYSTEM_MODULE_AI))
+        //   ->setFunctionName('AY List')
+        //   ->setRoute('academic_year_index')
+        //   ->setLabel('academic year list')
+        //   ->setPermittedRoles(["ROLE_ADMIN"])
+        //   ->setRouteUrl("/academic/year/")
+        //   ->setPosition(1)
+        //   ->setIsActive(1)
+        //   ->setIsSideMenu(1);
+        // $manager->persist($ayList);
+
+
     }
 
     public function getDependencies()

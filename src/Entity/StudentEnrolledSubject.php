@@ -47,9 +47,14 @@ class StudentEnrolledSubject
     private $dateEnrolled;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default" : 0})
      */
     private $isAddedSubject;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $dateSubjectAdded;
 
     public function getId(): ?int
     {
@@ -124,6 +129,18 @@ class StudentEnrolledSubject
     public function setIsAddedSubject(bool $isAddedSubject): self
     {
         $this->isAddedSubject = $isAddedSubject;
+
+        return $this;
+    }
+
+    public function getDateSubjectAdded(): ?\DateTimeInterface
+    {
+        return $this->dateSubjectAdded;
+    }
+
+    public function setDateSubjectAdded(\DateTimeInterface $dateSubjectAdded): self
+    {
+        $this->dateSubjectAdded = $dateSubjectAdded;
 
         return $this;
     }
